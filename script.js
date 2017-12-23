@@ -69,13 +69,20 @@ $ideaList.on('click', function(e) {
 
 var qualityArray = ['swill', 'plausible', 'genius'];
 
-$ideaList.on('click', function(e) {
-  if (e.target.className === 'upvote-button') {
-    if ($(e.target).siblings('.quality-value').text() === 'swill')  {
-      $(e.target).siblings('.quality-value').text(qualityArray[1]);
-    } else if ($(e.target).siblings('.quality-value').text() === 'plausible') {
-      $(e.target).siblings('.quality-value').text(qualityArray[2])
-    }
+$ideaList.on('click', '.upvote-button', function(e) {
+  var key = $(this).closest('article').attr('id')
+  var retrievedIdea = localStorage.getItem(key);
+  var parsedIdea = JSON.parse(retrievedIdea);
+  if ($(e.target).siblings('.quality-value').text() === 'swill')  {
+    $(e.target).siblings('.quality-value').text(qualityArray[1]);
+    parsedIdea['quality'] = 1;
+    var stringifiedObject = JSON.stringify(parsedIdea);
+    localStorage.setItem(key, stringifiedObject);
+  } else if ($(e.target).siblings('.quality-value').text() === 'plausible') {
+    $(e.target).siblings('.quality-value').text(qualityArray[2]);
+    parsedIdea['quality'] = 2;
+    var stringifiedObject = JSON.stringify(parsedIdea);
+    localStorage.setItem(key, stringifiedObject);
   }
 });
 
