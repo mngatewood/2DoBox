@@ -110,36 +110,27 @@ $('.search-bar').keyup(function(){
   console.log('hi');
 })
 
+$ideaList.on('click', 'h2', function() {
+  $(this).prop('contenteditable', true).focus();
+  $(this).focusout( function() {
+    var key = $(this).closest('article').attr('id');
+    var retrievedIdea = localStorage.getItem(key);
+    var parsedIdea = JSON.parse(retrievedIdea);
+    parsedIdea['title'] = $(this).html();
+    var stringifiedObject = JSON.stringify(parsedIdea);
+    localStorage.setItem(key, stringifiedObject);
+    });
+  });
 
 
-
-// function upvoteButton(e) {
-
-//     console.log(this.target);
-//   // e.target.siblings('')
-
-// }
-
-// function downvoteButton(e) {
-
-// }
-
-
-  //When a user clicks the title or body of an idea in the list, that text should become an editable text field, pre-populated with the existing idea title or body.
-  //The user should be able to “commit” their changes by pressing “Enter/Return” or by clicking outside of the text field.
-  //If the user reloads the page, their edits will be reflected.
-  // content editable 
-  // event listener (keyup)
-
-
-
-  //As a user types in the search box, the list of ideas should filter in real time to only display ideas whose title or body include the user’s text. The page should not reload.
-  //Clearing the search box should restore all the ideas to the list.
-
-    // var cardId = $(e.target).closest('cardname').getProp('id')
-
-    // $(`#${cardId} quality-value`)
-
-
-
-
+$ideaList.on('click', 'p', function() {
+  $(this).prop('contenteditable', true).focus();
+  $(this).focusout( function() {
+    var key = $(this).closest('article').attr('id');
+    var retrievedIdea = localStorage.getItem(key);
+    var parsedIdea = JSON.parse(retrievedIdea);
+    parsedIdea['body'] = $(this).html();
+    var stringifiedObject = JSON.stringify(parsedIdea);
+    localStorage.setItem(key, stringifiedObject);
+    });
+  });
