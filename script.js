@@ -22,8 +22,6 @@ $saveButton.on('click', function(event){
     return false;
   } else {
     event.preventDefault();
-  // var $ideaTitle = $('.idea-title');
-  // var $ideaContent = $('.idea-content');
   var newCard = new Card($ideaTitle.val(), $ideaContent.val());
   newCard.createCard();
   addToStorage(newCard);
@@ -40,7 +38,8 @@ function Card(title, body, uniqueId, quality) {
 }
 
 Card.prototype.createCard = function () {
-  $ideaList.prepend(`<article class="unique-id-style" id="${this.uniqueId}">
+  $ideaList.prepend(
+    `<article class="unique-id-style" id="${this.uniqueId}">
     <h2>${this.title}</h2>
     <img class="delete-button">
     <p class="idea-details">${this.body}</p>
@@ -80,13 +79,20 @@ $ideaList.on('click', function(e) {
   }
 });
 
-$ideaList.on('click', function(e) {
-  if (e.target.className === 'downvote-button') {
-    if ($(e.target).siblings('.quality-value').text() === 'genius') {
-      $(e.target).siblings('.quality-value').text(qualityArray[1]);
-    } else if ($(e.target).siblings('.quality-value').text() === 'plausible') {
-      $(e.target).siblings('.quality-value').text(qualityArray[0])
-    }
+$ideaList.on('click', '.downvote-button', function(e) {
+  var key = $(this).closest('article').attr('id')
+  var retrievedIdea = localStorage.getItem(key);
+  var parsedIdea = JSON.parse(retrievedIdea);
+  if ($(e.target).siblings('.quality-value').text() === 'genius') {
+    $(e.target).siblings('.quality-value').text(qualityArray[1]);
+    parsedIdea['quality'] = 1;
+    var stringifiedObject = JSON.stringify(parsedIdea);
+    localStorage.setItem(key, stringifiedObject);
+  } else if ($(e.target).siblings('.quality-value').text() === 'plausible') {
+    $(e.target).siblings('.quality-value').text(qualityArray[0]);
+    parsedIdea['quality'] = 0;
+    var stringifiedObject = JSON.stringify(parsedIdea);
+    localStorage.setItem(key, stringifiedObject);
   }
 });
 
