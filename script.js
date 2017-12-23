@@ -1,12 +1,11 @@
-window.onload = function() {
-  persistIdea();
-}
-
 var $saveButton = $('#save-button');
 var $ideaList = $('.idea-list');
 var $ideaTitle = $('.idea-title');
 var $ideaContent = $('.idea-content');
 
+window.onload = function() {
+  persistIdea();
+}
 
 function persistIdea() {
   for(i = 0; i < localStorage.length; i++) {
@@ -18,15 +17,19 @@ function persistIdea() {
 }
 
 $saveButton.on('click', function(event){
-  event.preventDefault();
-  var $ideaTitle = $('.idea-title');
-  var $ideaContent = $('.idea-content');
+
+  if ($ideaTitle.val() == "" || $ideaContent.val() == ""){
+    return false;
+  } else {
+    event.preventDefault();
+  // var $ideaTitle = $('.idea-title');
+  // var $ideaContent = $('.idea-content');
   var newCard = new Card($ideaTitle.val(), $ideaContent.val());
   newCard.createCard();
   addToStorage(newCard);
   $('.idea-title').val('');
   $('.idea-content').val('');
-  // $('.idea-title').focus();
+  }
 })
 
 function Card(title, body, uniqueId, quality) {
@@ -39,10 +42,10 @@ function Card(title, body, uniqueId, quality) {
 Card.prototype.createCard = function () {
   $ideaList.prepend(`<article class="unique-id-style" id="${this.uniqueId}">
     <h2>${this.title}</h2>
-    <img class="delete-button" src="images/delete.svg" alt="delete-idea">
+    <img class="delete-button">
     <p class="idea-details">${this.body}</p>
-    <img class="upvote-button" src="images/upvote.svg" alt="upvote-idea">
-    <img class="downvote-button" src="images/downvote.svg" alt="downvote-idea">
+    <img class="upvote-button">
+    <img class="downvote-button">
     <h3 class="idea-quality">quality:</h3>
     <h3 class="quality-value">${qualityArray[this.quality]}</h3>
     <hr>
@@ -89,10 +92,10 @@ $ideaList.on('click', function(e) {
 
 
 var $searchResults = $('.unique-id-style p');
-  $('.search-bar').keyup(function(){
-    var results = $.trim($(this).val()).replace('').toLowerCase();
-    console.log('hi');
-  })
+$('.search-bar').keyup(function(){
+  var results = $.trim($(this).val()).replace('').toLowerCase();
+  console.log('hi');
+})
 
 
 
