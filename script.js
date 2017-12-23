@@ -1,8 +1,3 @@
-var $saveButton = $('#save-button');
-var $ideaList = $('.idea-list');
-var $ideaTitle = $('.idea-title');
-var $ideaContent = $('.idea-content');
-
 window.onload = function() {
   persistIdea();
 }
@@ -16,13 +11,13 @@ function persistIdea() {
   }
 }
 
-$saveButton.on('click', function(event){
+$('#save-button').on('click', function(event){
 
-  if ($ideaTitle.val() == "" || $ideaContent.val() == ""){
+  if ($('.idea-title').val() == "" || $('.idea-content').val() == ""){
     return false;
   } else {
     event.preventDefault();
-  var newCard = new Card($ideaTitle.val(), $ideaContent.val());
+  var newCard = new Card($('.idea-title').val(), $('.idea-content').val());
   newCard.createCard();
   addToStorage(newCard);
   $('.idea-title').val('');
@@ -38,7 +33,7 @@ function Card(title, body, uniqueId, quality) {
 }
 
 Card.prototype.createCard = function () {
-  $ideaList.prepend(
+  $('.idea-list').prepend(
     `<article class="unique-id-style" id="${this.uniqueId}">
     <h2>${this.title}</h2>
     <img class="delete-button">
@@ -57,7 +52,7 @@ function addToStorage(object) {
   localStorage.setItem(object.uniqueId, stringifyObj);
 }
 
-$ideaList.on('click', function(e) {
+$('.idea-list').on('click', function(e) {
   if (e.target.className === 'delete-button') {
     var ideaId = e.target.closest('.unique-id-style').id;
     $(`#${ideaId}`).remove();
@@ -69,7 +64,7 @@ $ideaList.on('click', function(e) {
 
 var qualityArray = ['swill', 'plausible', 'genius'];
 
-$ideaList.on('click', '.upvote-button', function(e) {
+$('.idea-list').on('click', '.upvote-button', function(e) {
   var key = $(this).closest('article').attr('id')
   var retrievedIdea = localStorage.getItem(key);
   var parsedIdea = JSON.parse(retrievedIdea);
@@ -86,7 +81,7 @@ $ideaList.on('click', '.upvote-button', function(e) {
   }
 });
 
-$ideaList.on('click', '.downvote-button', function(e) {
+$('.idea-list').on('click', '.downvote-button', function(e) {
   var key = $(this).closest('article').attr('id')
   var retrievedIdea = localStorage.getItem(key);
   var parsedIdea = JSON.parse(retrievedIdea);
@@ -103,7 +98,7 @@ $ideaList.on('click', '.downvote-button', function(e) {
   }
 });
 
-$ideaList.on('click', 'h2', function() {
+$('.idea-list').on('click', 'h2', function() {
   $(this).prop('contenteditable', true).focus();
   $(this).focusout( function() {
     var key = $(this).closest('article').attr('id');
@@ -116,7 +111,7 @@ $ideaList.on('click', 'h2', function() {
   });
 
 
-$ideaList.on('click', 'p', function() {
+$('.idea-list').on('click', 'p', function() {
   $(this).prop('contenteditable', true).focus();
   $(this).focusout( function() {
     var key = $(this).closest('article').attr('id');
