@@ -11,7 +11,7 @@ body {
 }
 
 .banner {
-  background-color: #E5F3F2 ;
+  background-color: #E5F3F2;
   display: flex;
   justify-content: center;
 }
@@ -78,6 +78,7 @@ img {
   display: inline-block;
   height: 25px;
   width: 25px;
+  border: none;
 }
 
 .idea-list {
@@ -100,7 +101,7 @@ h3 {
 }
 
 .delete-button {
-  background: url("images/delete.svg");
+  background: url("images/delete.svg") no-repeat;
   position: absolute;
   right: .55rem;
   top: 0.35rem;
@@ -109,7 +110,7 @@ h3 {
 }
 
 .delete-button:hover {
-  background: url("images/delete-hover.svg");
+  background: url("images/delete-hover.svg") no-repeat;
 }
 
 .idea-details {
@@ -216,42 +217,9 @@ hr {
 
   .save-button {
     margin-bottom: 2%;
-
   }
 
   .search-bar {
     margin: 3% 0 5% 0;
   }
-
-
-  /*h1 {
-    font-size: 2rem;
-    margin: 2% auto 2% auto;
-    width: 50%;
-  }
-
-  .idea-title,
-  .idea-body,
-  .save-button {
-    height: 5%; 
-    margin: 1.1% 0 1.1% 0;
-    font-size: 1.2rem;
-  }
-
-  .unique-id-style,
-  .search-bar {
-    width: 505px;
-    height: 5%;
-    margin: 2% 0 2% 1px;
-    font-size: 1.2rem;
-  }
-
-  h2 {
-    font-size: 1.2rem;
-  }
-
-  h3,
-  .idea-details {
-    font-size: 1rem;
-  }*/
 }
