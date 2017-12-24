@@ -33,8 +33,8 @@ window.onload = function() {
 function persistIdea() {
   for(i = 0; i < localStorage.length; i++) {
     var getObject = localStorage.getItem(localStorage.key(i));
-    var parseObject = JSON.parse(getObject);
-    var persistCard = new Card(parseObject.title, parseObject.body, parseObject.uniqueId, parseObject.quality);
+    var obj = JSON.parse(getObject);
+    var persistCard = new Card(obj.title, obj.body, obj.uniqueId, obj.quality);
     persistCard.createCard();
   }
 }
@@ -50,6 +50,8 @@ function parseFromStorage(object) {
   var parsedIdea = JSON.parse(retrievedIdea);
   return parsedIdea;
 }
+
+var qualityArray = ['swill', 'plausible', 'genius'];
 
 function upVoteStorage (event, object) {
   var $quality = $(event.target).siblings('.quality-value')
@@ -111,8 +113,6 @@ $('.idea-list').on('click', function(event) {
     localStorage.removeItem(ideaId);
   }
 });
-
-var qualityArray = ['swill', 'plausible', 'genius'];
 
 $('.idea-list').on('click', '.upvote-button', function(event) {
   var parsedIdea = parseFromStorage(event);
