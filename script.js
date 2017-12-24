@@ -1,41 +1,3 @@
-window.onload = function() {
-  persistIdea();
-}
-
-function persistIdea() {
-  for(i = 0; i < localStorage.length; i++) {
-    var getObject = localStorage.getItem(localStorage.key(i));
-    var parseObject = JSON.parse(getObject);
-    var persistCard = new Card(parseObject.title, parseObject.body, parseObject.uniqueId, parseObject.quality);
-    persistCard.createCard();
-  }
-}
-
-$('#save-button').on('click', function(event){
-
-  if ($('.idea-title').val() == "" || $('.idea-content').val() == ""){
-    return false;
-  } else {
-    event.preventDefault();
-    var newCard = new Card($('.idea-title').val(), $('.idea-content').val());
-    newCard.createCard();
-    stringToStorage(newCard);
-    resetInputField();
-  }
-})
-
-function resetInputField () {
-  $('.idea-title').val('');
-  $('.idea-content').val('');
-  $('.idea-title').focus();
-}
-
-function Card(title, body, uniqueId, quality) {
- this.title = title;
- this.uniqueId = uniqueId || $.now();
- this.body = body;
- this.quality = quality || 0;
-}
 
 Card.prototype.createCard = function () {
   $('.idea-list').prepend(
@@ -51,20 +13,31 @@ Card.prototype.createCard = function () {
     </article>`);
 }
 
+function Card (title, body, uniqueId, quality) {
+ this.title = title;
+ this.uniqueId = uniqueId || $.now();
+ this.body = body;
+ this.quality = quality || 0;
+}
 
+function resetInputField () {
+  $('.idea-title').val('');
+  $('.idea-content').val('');
+  $('.idea-title').focus();
+}
 
-$('.idea-list').on('click', function(e) {
-  if (e.target.className === 'delete-button') {
-    var ideaId = e.target.closest('.unique-id-style').id;
-    $(`#${ideaId}`).remove();
-    localStorage.removeItem(ideaId);
+window.onload = function() {
+  persistIdea();
+}
+
+function persistIdea() {
+  for(i = 0; i < localStorage.length; i++) {
+    var getObject = localStorage.getItem(localStorage.key(i));
+    var parseObject = JSON.parse(getObject);
+    var persistCard = new Card(parseObject.title, parseObject.body, parseObject.uniqueId, parseObject.quality);
+    persistCard.createCard();
   }
-
-
-});
-
-var qualityArray = ['swill', 'plausible', 'genius'];
-
+}
 
 function stringToStorage(object) {
   var stringifyObject = JSON.stringify(object);
@@ -78,32 +51,80 @@ function parseFromStorage(object) {
   return parsedIdea;
 }
 
+function upVoteStorage (event, object) {
+  var $quality = $(event.target).siblings('.quality-value')
+  if ($quality.text() === 'swill')  {
+    object['quality'] = 1;
+    stringToStorage(object);
+  } else if ($quality.text() === 'plausible') {
+    object['quality'] = 2;
+    stringToStorage(object);
+  }
+}
 
-$('.idea-list').on('click', '.upvote-button', function(event) {
-  
-  var parsedIdea = parseFromStorage(event);
-  if ($(event.target).siblings('.quality-value').text() === 'swill')  {
-    $(event.target).siblings('.quality-value').text(qualityArray[1]);
-    parsedIdea['quality'] = 1;
-    stringToStorage(parsedIdea);
-  } else if ($(event.target).siblings('.quality-value').text() === 'plausible') {
-    $(event.target).siblings('.quality-value').text(qualityArray[2]);
-    parsedIdea['quality'] = 2;
-    stringToStorage(parsedIdea);
+function upVotePage (event, object) {
+  var $quality = $(event.target).siblings('.quality-value')
+  if ($quality.text() === 'swill')  {
+    $quality.text(qualityArray[1]);
+  } else if ($quality.text() === 'plausible') {
+    $quality.text(qualityArray[2]);
+    stringToStorage(object);
+  }
+}
+
+function downVoteStorage (event, object) {
+  var $quality = $(event.target).siblings('.quality-value')
+  if ($quality.text() === 'genius') {
+    object['quality'] = 1;
+    stringToStorage(object);
+  } else if ($quality.text() === 'plausible') {
+    object['quality'] = 0;
+    stringToStorage(object);
+  }
+}
+
+function downVotePage (event, object) {
+  var $quality = $(event.target).siblings('.quality-value')
+  if ($quality.text() === 'genius') {
+    $quality.text(qualityArray[1]);
+  } else if ($quality.text() === 'plausible') {
+    $quality.text(qualityArray[0]);
+  }
+}
+
+$('#save-button').on('click', function(event){
+  if ($('.idea-title').val() == "" || $('.idea-content').val() == ""){
+    return false;
+  } else {
+    event.preventDefault();
+    var newCard = new Card($('.idea-title').val(), $('.idea-content').val());
+    newCard.createCard();
+    stringToStorage(newCard);
+    resetInputField();
+  }
+})
+
+$('.idea-list').on('click', function(event) {
+  if (event.target.className === 'delete-button') {
+    var ideaId = event.target.closest('.unique-id-style').id;
+    $(`#${ideaId}`).remove();
+    localStorage.removeItem(ideaId);
   }
 });
 
+var qualityArray = ['swill', 'plausible', 'genius'];
+
+$('.idea-list').on('click', '.upvote-button', function(event) {
+  var parsedIdea = parseFromStorage(event);
+  upVoteStorage(event, parsedIdea);
+  upVotePage(event, parsedIdea);
+});
+
+
 $('.idea-list').on('click', '.downvote-button', function(event) {
   var parsedIdea = parseFromStorage(event);
-  if ($(event.target).siblings('.quality-value').text() === 'genius') {
-    $(event.target).siblings('.quality-value').text(qualityArray[1]);
-    parsedIdea['quality'] = 1;
-    stringToStorage(parsedIdea);
-  } else if ($(event.target).siblings('.quality-value').text() === 'plausible') {
-    $(event.target).siblings('.quality-value').text(qualityArray[0]);
-    parsedIdea['quality'] = 0;
-    stringToStorage(parsedIdea);
-  }
+  downVoteStorage(event, parsedIdea);
+  downVotePage(event, parsedIdea)
 });
 
 $('.idea-list').on('click', 'h2', function(event) {
@@ -112,9 +133,8 @@ $('.idea-list').on('click', 'h2', function(event) {
     var parsedIdea = parseFromStorage(event);
     parsedIdea['title'] = $(this).html();
     stringToStorage(parsedIdea);
-    });
   });
-
+});
 
 $('.idea-list').on('click', 'p', function(event) {
   $(this).prop('contenteditable', true).focus();
@@ -122,8 +142,8 @@ $('.idea-list').on('click', 'p', function(event) {
     var parsedIdea = parseFromStorage(event);
     parsedIdea['body'] = $(this).html();
     stringToStorage(parsedIdea);
-    });
   });
+});
 
 
 $('.search-bar').on('keyup', function() {
