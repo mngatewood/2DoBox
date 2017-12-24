@@ -88,8 +88,9 @@ input::placeholder {
 
 /*Resizing delete, up vote, & down vote buttons*/
 img {
-  height: 20px;
-  width: 20px;
+  display: inline-block;
+  height: 25px;
+  width: 25px;
 }
 
 .idea-list {
@@ -140,17 +141,13 @@ h3 {
 }
 
 .upvote-button {
-  background: url("images/upvote.svg");
+  background: url("images/upvote.svg") no-repeat;
   margin: 0 2% 0 0;
-  height: 25px;
-  width: 25px;
 
 } 
 .downvote-button {
-  background: url("images/downvote.svg");
+  background: url("images/downvote.svg") no-repeat;
   margin: 0 2% 0 0;
-  height: 25px;
-  width: 25px;
 }
 
 .upvote-button:hover {
@@ -162,7 +159,7 @@ h3 {
 }
 
 .quality-value {
-  left: 25%;
+  left: 14%;
   font-family: "Open Sans", serif;
   font-weight: 400;
 }
