@@ -1,8 +1,3 @@
-var $saveButton = $('#save-button');
-var $ideaList = $('.idea-list');
-var $ideaTitle = $('.idea-title');
-var $ideaContent = $('.idea-content');
-
 window.onload = function() {
   persistIdea();
 }
@@ -16,19 +11,24 @@ function persistIdea() {
   }
 }
 
-$saveButton.on('click', function(event){
+$('#save-button').on('click', function(event){
 
-  if ($ideaTitle.val() == "" || $ideaContent.val() == ""){
+  if ($('.idea-title').val() == "" || $('.idea-content').val() == ""){
     return false;
   } else {
     event.preventDefault();
-  var newCard = new Card($ideaTitle.val(), $ideaContent.val());
-  newCard.createCard();
-  addToStorage(newCard);
-  $('.idea-title').val('');
-  $('.idea-content').val('');
+    var newCard = new Card($('.idea-title').val(), $('.idea-content').val());
+    newCard.createCard();
+    stringToStorage(newCard);
+    resetInputField();
   }
 })
+
+function resetInputField () {
+  $('.idea-title').val('');
+  $('.idea-content').val('');
+  $('.idea-title').focus();
+}
 
 function Card(title, body, uniqueId, quality) {
  this.title = title;
@@ -38,7 +38,7 @@ function Card(title, body, uniqueId, quality) {
 }
 
 Card.prototype.createCard = function () {
-  $ideaList.prepend(
+  $('.idea-list').prepend(
     `<article class="unique-id-style" id="${this.uniqueId}">
     <h2>${this.title}</h2>
     <img class="delete-button">
@@ -52,12 +52,8 @@ Card.prototype.createCard = function () {
 }
 
 
-function addToStorage(object) {
-  var stringifyObj = JSON.stringify(object);
-  localStorage.setItem(object.uniqueId, stringifyObj);
-}
 
-$ideaList.on('click', function(e) {
+$('.idea-list').on('click', function(e) {
   if (e.target.className === 'delete-button') {
     var ideaId = e.target.closest('.unique-id-style').id;
     $(`#${ideaId}`).remove();
@@ -69,62 +65,63 @@ $ideaList.on('click', function(e) {
 
 var qualityArray = ['swill', 'plausible', 'genius'];
 
-$ideaList.on('click', '.upvote-button', function(e) {
-  var key = $(this).closest('article').attr('id')
+
+function stringToStorage(object) {
+  var stringifyObject = JSON.stringify(object);
+  localStorage.setItem(object.uniqueId, stringifyObject);
+}
+
+function parseFromStorage(object) {
+  var key = $(object.target).closest('article').attr('id');
   var retrievedIdea = localStorage.getItem(key);
   var parsedIdea = JSON.parse(retrievedIdea);
-  if ($(e.target).siblings('.quality-value').text() === 'swill')  {
-    $(e.target).siblings('.quality-value').text(qualityArray[1]);
+  return parsedIdea;
+}
+
+
+$('.idea-list').on('click', '.upvote-button', function(event) {
+  
+  var parsedIdea = parseFromStorage(event);
+  if ($(event.target).siblings('.quality-value').text() === 'swill')  {
+    $(event.target).siblings('.quality-value').text(qualityArray[1]);
     parsedIdea['quality'] = 1;
-    var stringifiedObject = JSON.stringify(parsedIdea);
-    localStorage.setItem(key, stringifiedObject);
-  } else if ($(e.target).siblings('.quality-value').text() === 'plausible') {
-    $(e.target).siblings('.quality-value').text(qualityArray[2]);
+    stringToStorage(parsedIdea);
+  } else if ($(event.target).siblings('.quality-value').text() === 'plausible') {
+    $(event.target).siblings('.quality-value').text(qualityArray[2]);
     parsedIdea['quality'] = 2;
-    var stringifiedObject = JSON.stringify(parsedIdea);
-    localStorage.setItem(key, stringifiedObject);
+    stringToStorage(parsedIdea);
   }
 });
 
-$ideaList.on('click', '.downvote-button', function(e) {
-  var key = $(this).closest('article').attr('id')
-  var retrievedIdea = localStorage.getItem(key);
-  var parsedIdea = JSON.parse(retrievedIdea);
-  if ($(e.target).siblings('.quality-value').text() === 'genius') {
-    $(e.target).siblings('.quality-value').text(qualityArray[1]);
+$('.idea-list').on('click', '.downvote-button', function(event) {
+  var parsedIdea = parseFromStorage(event);
+  if ($(event.target).siblings('.quality-value').text() === 'genius') {
+    $(event.target).siblings('.quality-value').text(qualityArray[1]);
     parsedIdea['quality'] = 1;
-    var stringifiedObject = JSON.stringify(parsedIdea);
-    localStorage.setItem(key, stringifiedObject);
-  } else if ($(e.target).siblings('.quality-value').text() === 'plausible') {
-    $(e.target).siblings('.quality-value').text(qualityArray[0]);
+    stringToStorage(parsedIdea);
+  } else if ($(event.target).siblings('.quality-value').text() === 'plausible') {
+    $(event.target).siblings('.quality-value').text(qualityArray[0]);
     parsedIdea['quality'] = 0;
-    var stringifiedObject = JSON.stringify(parsedIdea);
-    localStorage.setItem(key, stringifiedObject);
+    stringToStorage(parsedIdea);
   }
 });
 
-$ideaList.on('click', 'h2', function() {
+$('.idea-list').on('click', 'h2', function(event) {
   $(this).prop('contenteditable', true).focus();
   $(this).focusout( function() {
-    var key = $(this).closest('article').attr('id');
-    var retrievedIdea = localStorage.getItem(key);
-    var parsedIdea = JSON.parse(retrievedIdea);
+    var parsedIdea = parseFromStorage(event);
     parsedIdea['title'] = $(this).html();
-    var stringifiedObject = JSON.stringify(parsedIdea);
-    localStorage.setItem(key, stringifiedObject);
+    stringToStorage(parsedIdea);
     });
   });
 
 
-$ideaList.on('click', 'p', function() {
+$('.idea-list').on('click', 'p', function(event) {
   $(this).prop('contenteditable', true).focus();
   $(this).focusout( function() {
-    var key = $(this).closest('article').attr('id');
-    var retrievedIdea = localStorage.getItem(key);
-    var parsedIdea = JSON.parse(retrievedIdea);
+    var parsedIdea = parseFromStorage(event);
     parsedIdea['body'] = $(this).html();
-    var stringifiedObject = JSON.stringify(parsedIdea);
-    localStorage.setItem(key, stringifiedObject);
+    stringToStorage(parsedIdea);
     });
   });
 
