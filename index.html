@@ -1,43 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <title>2DoBox</title>
-  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-  <meta content="utf-8" http-equiv="encoding">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="main.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400|Roboto+Slab:400,700" rel="stylesheet">
-</head>
-
-<body>
-
-<section class="banner" role="banner">
-  <article class="banner-content">
-    <h1>2Do<span class="h1-style">Box</span></h1>
-    <form>
-      <label for="idea-title"></label>
-      <input type="text" placeholder="Title" class="idea-title">
-      <label for="idea-body"></label>
-      <input type="text" placeholder="Body" class="idea-body">
-      <label for="save-button"></label>
-      <input type="submit" value="save" id="save-button" class="save-button">
-    </form>
-  </article>
-</section>
-
-
-<section class="search">
-  <form>
-    <label for="search-bar"></label>
-    <input type="text" placeholder="Search" class="search-bar">
-  </form>
-</section>
-
-<section class="idea-list" role="main">
-</section>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="script.js"></script>
-</body>
+  <head>
+    <title>2DoBox</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400|Roboto+Slab:400,700" rel="stylesheet">
+  </head>
+  <body>
+    <header id="input-container">
+      <section id="input-content" role="dialog">
+        <h1>2Do<span id="h1-style">Box</span></h1>
+        <form>
+          <label for="title-input"></label>
+          <input id="title-input" type="text" placeholder="Title">
+          <label for="task-input"></label>
+          <input id="task-input" type="text" placeholder="Task">
+          <label for="save-button"></label>
+          <input id="save-button" type="submit" value="save">
+        </form>
+      </section>
+    </header>
+    <section id="search-container" role="search">
+      <form>
+        <label for="search-input"></label>
+        <input id="search-input" type="text" placeholder="Search">
+      </form>
+    </section>
+    <main id="task-container" role="main">
+    </main>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
 </html>
