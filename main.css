@@ -10,13 +10,13 @@ body {
   font-size: 12px;
 }
 
-.banner {
-  background-color: #E5F3F2;
+#input-container {
+  background-color: #E5F3F2 ;
   display: flex;
   justify-content: center;
 }
 
-.banner-content {
+#input-content {
   width: 70%;
 }
 
@@ -28,16 +28,11 @@ h1 {
   text-align: center;
 }
 
-.h1-style {
+#h1-style {
   color: #6D6E71 ;
 }
 
 input {
-  padding-left: 5px;
-}
-
-.idea-title,
-.idea-body {
   align-self: center;
   border: solid #D1D3D4 0.5px;
   box-shadow: 0 0 0 .1rem rgba(187,189,191,0.3);
@@ -49,12 +44,12 @@ input {
   width: 100%;
 }
 
-.search {
+#search-container {
   text-align: center;
   width: 100%;
 }
 
-.save-button {
+#save-button {
   background-color: #00A79D ;
   color: #FFFFFF ;
   font-size: 1.5rem;
@@ -63,14 +58,8 @@ input {
   width: 100%;
 }
 
-.search-bar {
-  border: solid #D1D3D4 0.5px;
-  box-shadow: 0 0 0 .1rem rgba(187,189,191,0.3);
-  color: #939598 ;
-  font-size: 1.5rem;
-  letter-spacing: .05rem;
+#search-input {
   margin: 2% 0 2% 0;
-  padding: 0.2% 1.5% 0.2% 1.5%;
   width: 70%;
 }
 
@@ -78,16 +67,15 @@ img {
   display: inline-block;
   height: 25px;
   width: 25px;
-  border: none;
 }
 
-.idea-list {
+#task-container {
   align-items: center;
   display: flex;
   flex-direction: column;
 }
 
-.unique-id-style {
+.task-element {
   position: relative;
   width: 70%;
 }
@@ -113,7 +101,7 @@ h3 {
   background: url("images/delete-hover.svg") no-repeat;
 }
 
-.idea-details {
+.task-description {
   color: #939598 ;
   font-size: 1.2rem;
   padding: 0 0 1rem 0;
@@ -121,25 +109,25 @@ h3 {
   word-wrap: break-word;
 }
 
-.upvote-button {
+.importance-up-button {
   background: url("images/upvote.svg") no-repeat;
   margin: 0 2% 0 0;
 
 } 
-.downvote-button {
+.importance-down-button {
   background: url("images/downvote.svg") no-repeat;
   margin: 0 2% 0 0;
 }
 
-.upvote-button:hover {
+.importance-up-button:hover {
   background: url("images/upvote-hover.svg") no-repeat;
 }
 
-.downvote-button:hover {
+.importance-down-button:hover {
   background: url("images/downvote-hover.svg") no-repeat;
 }
 
-h3 {
+.task-importance-element {
   display: inline-block;
   line-height: 24px;
   font-size: 1rem;
@@ -147,7 +135,7 @@ h3 {
   margin: 0 0 0 0.5rem;
 }
 
-.quality-value {
+.task-importance-value {
   font-family: "Open Sans", serif;
   font-weight: 400;
 }
@@ -161,7 +149,7 @@ hr {
 
 @media screen and (max-width: 720px) {
 
-  .banner-content {
+  #input-content {
     align-content: center;
     width: 505px
   }
@@ -172,16 +160,18 @@ hr {
     width: 50%;
   }
 
-  .idea-title,
-  .idea-body,
-  .save-button {
+  input,
+  #save-button {
     height: 5%; 
     margin: 1.1% 0 1.1% 0;
     font-size: 1.2rem;
   }
 
-  .unique-id-style,
-  .search-bar {
+  #search-bar {
+    width: 505px;
+  }
+
+  .task-element {
     width: 505px;
     height: 5%;
     margin: 2% 0 2% 1px;
@@ -192,8 +182,8 @@ hr {
     font-size: 1.2rem;
   }
 
-  h3,
-  .idea-details {
+  .task-importance-element,
+  .task-details {
     font-size: 1rem;
   }
 
@@ -201,25 +191,23 @@ hr {
 
 @media screen and (max-width: 526px) {
 
-  .banner {
-  }
-
   h1,
-  .banner-content,
-  .idea-title,
-  .idea-body,
-  .save-button,
-  .search-bar,
-  .unique-id-style {
+  #input-content,
+  #title-input
+  #task-input,
+  #save-button,
+  .task-element {
     width: 95vw;
     margin: 0 0 2% 0;
   }
 
-  .save-button {
+  #save-button {
     margin-bottom: 2%;
   }
 
-  .search-bar {
+  #search-input {
+    width: 95vw;
     margin: 3% 0 5% 0;
   }
+  
 }
