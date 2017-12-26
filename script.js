@@ -56,7 +56,7 @@ function parseFromStorage(object) {
 
 
 function upVoteStorage (event, object) {
-  var $quality = $(event.target).siblings('.importance-value')
+  var $quality = $(event.target).siblings('.importance-value');
   if ($quality.text() === 'None')  {
     object['quality'] = 1;
     stringToStorage(object);
@@ -73,9 +73,10 @@ function upVoteStorage (event, object) {
 }
 
 function upVotePage (event, object) {
-  var $quality = $(event.target).siblings('.importance-value')
+  var $quality = $(event.target).siblings('.importance-value');
   if ($quality.text() === 'None')  {
     $quality.text(qualityArray[1]);
+    stringToStorage(object);
   } else if ($quality.text() === 'Low') {
     $quality.text(qualityArray[2]);
     stringToStorage(object);
@@ -89,8 +90,14 @@ function upVotePage (event, object) {
 }
 
 function downVoteStorage (event, object) {
-  var $quality = $(event.target).siblings('.importance-value')
-  if ($quality.text() === 'Normal') {
+  var $quality = $(event.target).siblings('.importance-value');
+  if ($quality.text() === 'Critical') {
+    object['quality'] = 3;
+    stringToStorage(object);
+  } else if ($quality.text() === 'High') {
+    object['quality'] = 2;
+    stringToStorage(object);
+  } else if ($quality.text() === 'Normal') {
     object['quality'] = 1;
     stringToStorage(object);
   } else if ($quality.text() === 'Low') {
@@ -100,8 +107,12 @@ function downVoteStorage (event, object) {
 }
 
 function downVotePage (event, object) {
-  var $quality = $(event.target).siblings('.importance-value')
-  if ($quality.text() === 'Normal') {
+  var $quality = $(event.target).siblings('.importance-value');
+  if ($quality.text() === 'Critical') {
+    $quality.text(qualityArray[3]);
+  } else if ($quality.text() === 'High') {
+    $quality.text(qualityArray[2]);
+  } else if ($quality.text() === 'Normal') {
     $quality.text(qualityArray[1]);
   } else if ($quality.text() === 'Low') {
     $quality.text(qualityArray[0]);
