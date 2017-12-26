@@ -82,6 +82,7 @@ img {
 
 h2, 
 h3 {
+  display: inline-block;
   color: #6D6E71 ;
   font-family: "Roboto Slab", serif;
   font-weight: 700;
@@ -127,7 +128,7 @@ h3 {
   background: url("images/downvote-hover.svg") no-repeat;
 }
 
-.task-importance-element {
+.importance-element {
   display: inline-block;
   line-height: 24px;
   font-size: 1rem;
@@ -135,7 +136,7 @@ h3 {
   margin: 0 0 0 0.5rem;
 }
 
-.task-importance-value {
+.importance-value {
   font-family: "Open Sans", serif;
   font-weight: 400;
 }

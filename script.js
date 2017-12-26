@@ -1,14 +1,14 @@
 
 Card.prototype.createCard = function () {
-  $('.idea-list').prepend(
-    `<article class="unique-id-style" id="${this.uniqueId}">
+  $('#task-container').prepend(
+    `<article class="task-element" id="${this.uniqueId}">
     <h2>${this.title}</h2>
     <img class="delete-button">
-    <p class="idea-details">${this.body}</p>
-    <img class="upvote-button">
-    <img class="downvote-button">
-    <h3 class="idea-quality">quality:</h3>
-    <h3 class="quality-value">${qualityArray[this.quality]}</h3>
+    <p class="task-description">${this.body}</p>
+    <img class="importance-up-button">
+    <img class="importance-down-button">
+    <h3 class="importance-element">importance: </h3>
+    <h3 class="importance-value">${qualityArray[this.quality]}</h3>
     <hr>
     </article>`);
 }
@@ -21,9 +21,9 @@ function Card (title, body, uniqueId, quality) {
 }
 
 function resetInputField () {
-  $('.idea-title').val('');
-  $('.idea-content').val('');
-  $('.idea-title').focus();
+  $('#title-input').val('');
+  $('#task-input').val('');
+  $('#title-input').focus();
 }
 
 window.onload = function() {
@@ -54,7 +54,7 @@ function parseFromStorage(object) {
 var qualityArray = ['swill', 'plausible', 'genius'];
 
 function upVoteStorage (event, object) {
-  var $quality = $(event.target).siblings('.quality-value')
+  var $quality = $(event.target).siblings('.importance-value')
   if ($quality.text() === 'swill')  {
     object['quality'] = 1;
     stringToStorage(object);
@@ -65,7 +65,7 @@ function upVoteStorage (event, object) {
 }
 
 function upVotePage (event, object) {
-  var $quality = $(event.target).siblings('.quality-value')
+  var $quality = $(event.target).siblings('.importance-value')
   if ($quality.text() === 'swill')  {
     $quality.text(qualityArray[1]);
   } else if ($quality.text() === 'plausible') {
@@ -75,7 +75,7 @@ function upVotePage (event, object) {
 }
 
 function downVoteStorage (event, object) {
-  var $quality = $(event.target).siblings('.quality-value')
+  var $quality = $(event.target).siblings('.importance-value')
   if ($quality.text() === 'genius') {
     object['quality'] = 1;
     stringToStorage(object);
@@ -86,7 +86,7 @@ function downVoteStorage (event, object) {
 }
 
 function downVotePage (event, object) {
-  var $quality = $(event.target).siblings('.quality-value')
+  var $quality = $(event.target).siblings('.importance-value')
   if ($quality.text() === 'genius') {
     $quality.text(qualityArray[1]);
   } else if ($quality.text() === 'plausible') {
@@ -95,39 +95,39 @@ function downVotePage (event, object) {
 }
 
 $('#save-button').on('click', function(event){
-  if ($('.idea-title').val() == "" || $('.idea-content').val() == ""){
+  if ($('#title-input').val() == "" || $('#task-input').val() == ""){
     return false;
   } else {
     event.preventDefault();
-    var newCard = new Card($('.idea-title').val(), $('.idea-content').val());
+    var newCard = new Card($('#title-input').val(), $('#task-input').val());
     newCard.createCard();
     stringToStorage(newCard);
     resetInputField();
   }
 })
 
-$('.idea-list').on('click', function(event) {
+$('#task-container').on('click', function(event) {
   if (event.target.className === 'delete-button') {
-    var ideaId = event.target.closest('.unique-id-style').id;
+    var ideaId = event.target.closest('.task-element').id;
     $(`#${ideaId}`).remove();
     localStorage.removeItem(ideaId);
   }
 });
 
-$('.idea-list').on('click', '.upvote-button', function(event) {
+$('#task-container').on('click', '.importance-up-button', function(event) {
   var parsedIdea = parseFromStorage(event);
   upVoteStorage(event, parsedIdea);
   upVotePage(event, parsedIdea);
 });
 
 
-$('.idea-list').on('click', '.downvote-button', function(event) {
+$('#task-container').on('click', '.importance-down-button', function(event) {
   var parsedIdea = parseFromStorage(event);
   downVoteStorage(event, parsedIdea);
   downVotePage(event, parsedIdea)
 });
 
-$('.idea-list').on('click', 'h2', function(event) {
+$('#task-container').on('click', 'h2', function(event) {
   $(this).prop('contenteditable', true).focus();
   $(this).focusout( function() {
     var parsedIdea = parseFromStorage(event);
@@ -136,7 +136,7 @@ $('.idea-list').on('click', 'h2', function(event) {
   });
 });
 
-$('.idea-list').on('click', 'p', function(event) {
+$('#task-container').on('click', 'p', function(event) {
   $(this).prop('contenteditable', true).focus();
   $(this).focusout( function() {
     var parsedIdea = parseFromStorage(event);
@@ -146,9 +146,9 @@ $('.idea-list').on('click', 'p', function(event) {
 });
 
 
-$('.search-bar').on('keyup', function() {
-  var searchRequest = $('.search-bar').val();
-  $('.unique-id-style').each(function(){
+$('#search-input').on('keyup', function() {
+  var searchRequest = $('#search-input').val();
+  $('.task-element').each(function(){
     var searchResult = $(this).text().indexOf(searchRequest);
     this.style.display = searchResult > -1 ? "" : "none";
   })
