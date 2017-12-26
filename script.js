@@ -13,6 +13,8 @@ Card.prototype.createCard = function () {
     </article>`);
 }
 
+var qualityArray = ['None', 'Low', 'Normal', 'High', 'Critical'];
+
 function Card (title, body, uniqueId, quality) {
  this.title = title;
  this.uniqueId = uniqueId || $.now();
@@ -51,35 +53,47 @@ function parseFromStorage(object) {
   return parsedIdea;
 }
 
-var qualityArray = ['swill', 'plausible', 'genius'];
+
 
 function upVoteStorage (event, object) {
   var $quality = $(event.target).siblings('.importance-value')
-  if ($quality.text() === 'swill')  {
+  if ($quality.text() === 'None')  {
     object['quality'] = 1;
     stringToStorage(object);
-  } else if ($quality.text() === 'plausible') {
+  } else if ($quality.text() === 'Low') {
     object['quality'] = 2;
+    stringToStorage(object);
+  } else if ($quality.text() === 'Normal') {
+    object['quality'] = 3;
+    stringToStorage(object);
+  } else if ($quality.text() === 'High') {
+    object['quality'] = 4;
     stringToStorage(object);
   }
 }
 
 function upVotePage (event, object) {
   var $quality = $(event.target).siblings('.importance-value')
-  if ($quality.text() === 'swill')  {
+  if ($quality.text() === 'None')  {
     $quality.text(qualityArray[1]);
-  } else if ($quality.text() === 'plausible') {
+  } else if ($quality.text() === 'Low') {
     $quality.text(qualityArray[2]);
+    stringToStorage(object);
+  } else if ($quality.text() === 'Normal') {
+    $quality.text(qualityArray[3]);
+    stringToStorage(object);
+  } else if ($quality.text() === 'High') {
+    $quality.text(qualityArray[4]);
     stringToStorage(object);
   }
 }
 
 function downVoteStorage (event, object) {
   var $quality = $(event.target).siblings('.importance-value')
-  if ($quality.text() === 'genius') {
+  if ($quality.text() === 'Normal') {
     object['quality'] = 1;
     stringToStorage(object);
-  } else if ($quality.text() === 'plausible') {
+  } else if ($quality.text() === 'Low') {
     object['quality'] = 0;
     stringToStorage(object);
   }
@@ -87,9 +101,9 @@ function downVoteStorage (event, object) {
 
 function downVotePage (event, object) {
   var $quality = $(event.target).siblings('.importance-value')
-  if ($quality.text() === 'genius') {
+  if ($quality.text() === 'Normal') {
     $quality.text(qualityArray[1]);
-  } else if ($quality.text() === 'plausible') {
+  } else if ($quality.text() === 'Low') {
     $quality.text(qualityArray[0]);
   }
 }
