@@ -73,6 +73,7 @@ img {
   align-items: center;
   display: flex;
   flex-direction: column;
+
 }
 
 .task-element {
@@ -80,13 +81,22 @@ img {
   width: 70%;
 }
 
-h2, 
-h3 {
+h2 {
   display: inline-block;
   color: #6D6E71 ;
   font-family: "Roboto Slab", serif;
   font-weight: 700;
   font-size: 1.5rem;
+}
+
+h3 {
+  display: inline-block;
+  color: #6D6E71 ;
+  font-family: "Roboto Slab", serif;
+  font-weight: 700;
+  font-size: 1rem;
+  vertical-align: top;
+
 }
 
 .delete-button {
@@ -129,10 +139,7 @@ h3 {
 }
 
 .importance-element {
-  display: inline-block;
-  line-height: 24px;
-  font-size: 1rem;
-  position: absolute;
+  /*line-height: 24px;*/
   margin: 0 0 0 0.5rem;
 }
 
@@ -164,11 +171,15 @@ hr {
   input,
   #save-button {
     height: 5%; 
-    margin: 1.1% 0 1.1% 0;
+    margin: 1.1% 0 1.2% 0;
     font-size: 1.2rem;
   }
 
-  #search-bar {
+  #save-button {
+    margin: 1.1% 0 2% 0;
+  }
+
+  #search-input {
     width: 505px;
   }
 
@@ -190,7 +201,7 @@ hr {
 
 }
 
-@media screen and (max-width: 526px) {
+@media screen and (max-width: 520px) {
 
   h1,
   #input-content,
@@ -203,7 +214,32 @@ hr {
   }
 
   #save-button {
-    margin-bottom: 2%;
+    margin-bottom: 1%;
+  }
+
+  #search-input {
+    width: 95vw;
+    margin: 3% 0 5% 0;
+  }
+  
+}
+
+@media screen and (max-width: 320px) {
+ 
+/*do not shrink below 320px*/
+
+  h1,
+  #input-content,
+  #title-input
+  #task-input,
+  #save-button,
+  .task-element {
+    width: 95vw;
+    margin: 0 0 2% 0;
+  }
+
+  #save-button {
+    margin-bottom: 1%;
   }
 
   #search-input {
