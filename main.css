@@ -16,8 +16,10 @@ body {
   justify-content: center;
 }
 
-#input-content {
+#input-content,
+footer {
   width: 70%;
+  margin: auto;
 }
 
 h1 {
@@ -44,13 +46,33 @@ input {
   width: 100%;
 }
 
-#save-button {
+#save-button,
+#show-more-button {
   background-color: #00A79D ;
   color: #FFFFFF ;
   font-size: 1.5rem;
   margin: 0 0 3% 0;
   padding: 1% 0;
   width: 100%;
+}
+
+.importance-filter-button:hover,
+#save-button:hover,
+#show-more-button:hover {
+  background-color: #045e55;
+  color: #FFFFF;
+}
+
+#save-button:disabled,
+#show-more-button:disabled, 
+input[type="button"].inactive {
+  background-color: #F5F5F5;
+  color: #00A79D;
+}
+
+input[type="submit"]:hover{
+  background-color: #045e55;
+  color: #FFFFF;
 }
 
 #search-container {
@@ -194,7 +216,8 @@ hr {
 
 @media screen and (max-width: 720px) {
 
-  #input-content {
+  #input-content,
+  footer {
     align-content: center;
     width: 505px
   }
@@ -207,13 +230,15 @@ hr {
 
   input,
   #save-button,
-  .importance-filter-button {
+  .importance-filter-button,
+  #show-more-button {
     height: 5%; 
     margin: 1.1% 0 1.2% 0;
     font-size: 1.2rem;
   }
 
-  #save-button {
+  #save-button,
+  #show-more-button {
     margin: 1.1% 0 2% 0;
   }
 
@@ -225,8 +250,7 @@ hr {
   h4 {
   font-size: 1.2rem;
   margin: 0 0 0.3rem 0;
-}
-
+  }
 
   .importance-filter-button {
     width: 96px;
@@ -310,6 +334,17 @@ hr {
     font-size: 0.8rem;
     border-radius: 0.7rem;
   }
+
+  footer {
+    width: 95vw;
+  }
+
+  #show-more-button {
+    width: 95vw;
+    margin: auto;
+  }
+
+
   
 }
 
@@ -328,7 +363,9 @@ hr {
   #save-button,
   .task-element,
   #search-input,
-  #importance-filter-container {
+  #importance-filter-container,
+  footer,
+  #show-more-button {
     width: 300px;
   }
 

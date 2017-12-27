@@ -31,10 +31,14 @@ function resetInputField () {
   $('#title-input').val('');
   $('#task-input').val('');
   $('#title-input').focus();
+  disableSaveButton();
+  disableSeeMoreButton();
 }
 
 window.onload = function() {
   persistIdea();
+  disableSaveButton();
+  disableSeeMoreButton();
 }
 
 function persistIdea() {
@@ -124,6 +128,26 @@ function downVotePage (event, object) {
   }
 }
 
+function disableSaveButton() {
+  if ($('#title-input').val() === '' || $('#task-input').val() === '') {
+    $('#save-button').prop('disabled', true);
+  } else {
+    $('#save-button').prop('disabled', false);
+  }
+}
+
+function disableSeeMoreButton() {
+  if (localStorage.length > 10) {
+    $('#show-more-button').prop('disabled', false);
+  } else {
+    $('#show-more-button').prop('disabled', true);
+  }
+}
+
+function toggleFilterButton() {
+    $(event.target).toggleClass('inactive');
+}
+
 $('#save-button').on('click', function(event){
   if ($('#title-input').val() == "" || $('#task-input').val() == ""){
     return false;
@@ -132,6 +156,7 @@ $('#save-button').on('click', function(event){
     var newCard = new Card($('#title-input').val(), $('#task-input').val());
     newCard.createCard();
     stringToStorage(newCard);
+    disableSaveButton();
     resetInputField();
   }
 })
@@ -142,6 +167,8 @@ $('#task-container').on('click', function(event) {
     $(`#${ideaId}`).remove();
     localStorage.removeItem(ideaId);
   }
+  disableSeeMoreButton();
+
 });
 
 $('#task-container').on('click', '.importance-up-button', function(event) {
@@ -182,4 +209,16 @@ $('#search-input').on('keyup', function() {
     var searchResult = $(this).text().indexOf(searchRequest);
     this.style.display = searchResult > -1 ? "" : "none";
   })
+})
+
+$('#title-input').on('keyup', function () {
+  disableSaveButton();
+})
+
+$('#task-input').on('keyup', function () {
+  disableSaveButton();
+})
+
+$('.importance-filter-button').on('click', function(event) {
+  toggleFilterButton();
 })
