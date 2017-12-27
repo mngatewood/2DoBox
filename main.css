@@ -12,8 +12,11 @@ body {
 
 #input-container {
   background-color: #E5F3F2 ;
-  display: flex;
   justify-content: center;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  top: 0;
 }
 
 #input-content,
@@ -73,6 +76,11 @@ input[type="button"].inactive {
 input[type="submit"]:hover{
   background-color: #045e55;
   color: #FFFFF;
+}
+
+#spacer {
+  margin-bottom: 7.5rem;
+  margin-top: 12.4%;
 }
 
 #search-container {
@@ -185,11 +193,6 @@ h3 {
   background: url("images/downvote-hover.svg") no-repeat;
 }
 
-.importance-label {
-  /*line-height: 24px;*/
-  /*margin: 0 0.5rem 0 0.5rem;*/
-}
-
 .importance-value {
   line-height: 24px;
   font-family: "Open Sans", serif;
@@ -229,9 +232,7 @@ hr {
   }
 
   input,
-  #save-button,
-  .importance-filter-button,
-  #show-more-button {
+  .importance-filter-button {
     height: 5%; 
     margin: 1.1% 0 1.2% 0;
     font-size: 1.2rem;
@@ -239,7 +240,14 @@ hr {
 
   #save-button,
   #show-more-button {
+    height: 5%; 
     margin: 1.1% 0 2% 0;
+    font-size: 1.2rem;
+  }
+
+  #spacer {
+    font-size: 1rem;
+    margin-top: 45px;    
   }
 
   #search-input, 
@@ -305,19 +313,24 @@ hr {
 
   #input-content {
     width: 95vw;
-    margin: 0 0 2.5% 0;
+    /*margin: 0 0 2.5% 0;*/
   }
 
   #title-input
   #task-input,
-  #save-button,
   .task-element {
     width: 95vw;
-    margin: 0 0 2% 0;
+    margin: 0 0 2.5% 0;
   }
 
   #save-button {
-    margin-bottom: 1%;
+    width: 95vw;
+    margin-bottom: 2%;
+  }
+
+  #spacer {
+    font-size: 5.5rem;
+    margin: 12% 0 0 0;
   }
 
   #search-input {
@@ -356,16 +369,31 @@ hr {
     width: 320px;
   }
 
-  h1,
-  #input-content,
-  #title-input
+  #input-container,
+  #input-content {
+    height: 158px;
+  }
+
+  #title-input,
   #task-input,
-  #save-button,
+  #save-button {
+    height: 25px;
+    width: 300px;
+    margin: 3px 0 3px 0px;
+  }
+
+  #save-button {
+    height: 30px;
+  }
+
+  h1,
   .task-element,
   #search-input,
   #importance-filter-container,
   footer,
-  #show-more-button {
+  #show-more-button,
+  /*#main-container,*/
+  #spacer {
     width: 300px;
   }
 
