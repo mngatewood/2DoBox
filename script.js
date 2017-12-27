@@ -3,10 +3,10 @@ Card.prototype.createCard = function () {
   $('#task-container').prepend(
     `<article class="task-element" id="${this.uniqueId}">
     <h2>${this.title}</h2>
-    <img class="delete-button">
+    <button type="image" src="images/delete.svg" class="delete-button"></button>
     <p class="task-description">${this.body}</p>
-    <img class="importance-up-button">
-    <img class="importance-down-button">
+    <button type="image" src="images/upvote.svg" class="importance-up-button"></button>
+    <button type="image" src="images/downvote.svg" class="importance-down-button"></button>
     <h3 class="importance-element">importance: </h3>
     <h3 class="importance-value">${qualityArray[this.quality]}</h3>
     <hr>
