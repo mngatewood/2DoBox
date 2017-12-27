@@ -22,21 +22,26 @@
         </form>
       </section>
     </header>
-    <section id="search-container" role="search">
-      <form>
-        <label for="search-input"></label>
-        <input id="search-input" type="text" placeholder="Filter by text">
-        <h4>Filter by importance</h4>
-        <div id="importance-filter-container">
-          <input id="filter-none" class="importance-filter-button" type="button" value="none">
-          <input id="filter-low" class="importance-filter-button" type="button" value="low">
-          <input id="filter-normal" class="importance-filter-button" type="button" value="normal">
-          <input id="filter-high" class="importance-filter-button" type="button" value="high">
-          <input id="filter-critical" class="importance-filter-button" type="button" value="critical">
-        </div>
-      </form>
-    </section>
-    <main id="task-container" role="main">
+    <div id="spacer" aria-hidden>
+     &nbsp
+    </div>
+    <main id="main-container" role="main">
+      <section id="search-container" role="search">
+        <form>
+          <label for="search-input"></label>
+          <input id="search-input" type="text" placeholder="Filter by text">
+          <h4>Filter by importance</h4>
+          <div id="importance-filter-container">
+            <input id="filter-none" class="importance-filter-button" type="button" value="none">
+            <input id="filter-low" class="importance-filter-button" type="button" value="low">
+            <input id="filter-normal" class="importance-filter-button" type="button" value="normal">
+            <input id="filter-high" class="importance-filter-button" type="button" value="high">
+            <input id="filter-critical" class="importance-filter-button" type="button" value="critical">
+          </div>
+        </form>
+      </section>
+      <section id="task-container">
+      </section>
     </main>
     <footer role="footer">
       <input id="show-more-button" type="button" value="show more">
