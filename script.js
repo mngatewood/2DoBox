@@ -3,12 +3,17 @@ Card.prototype.createCard = function () {
   $('#task-container').prepend(
     `<article class="task-element" id="${this.uniqueId}">
     <h2>${this.title}</h2>
-    <button type="image" src="images/delete.svg" class="delete-button"></button>
-    <p class="task-description">${this.body}</p>
-    <button type="image" src="images/upvote.svg" class="importance-up-button"></button>
-    <button type="image" src="images/downvote.svg" class="importance-down-button"></button>
-    <h3 class="importance-element">importance: </h3>
-    <h3 class="importance-value">${qualityArray[this.quality]}</h3>
+    <button type="image" src="images/delete.svg" class="delete-button" aria-label="delete task"></button>
+    <p class="task-description" aria-label="task description">${this.body}</p>
+    <form>
+      <button type="image" src="images/upvote.svg" class="importance-up-button" aria-label="raise importance"></button>
+      <button type="image" src="images/downvote.svg" class="importance-down-button" aria-label="lower importance"></button>
+      <h3 class="importance-label">importance: </h3>
+      <h3 class="importance-value">${qualityArray[this.quality]}</h3>
+      <label for="task-complete" aria-label="task complete"></label>
+      <input type="checkbox" id="task-complete" class="task-complete" name="task-complete"></input>
+      <h3 class="task-complete-label">completed: </h3>
+    </form>
     <hr>
     </article>`);
 }

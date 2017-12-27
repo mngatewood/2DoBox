@@ -40,7 +40,7 @@ input {
   font-size: 1.5rem;
   letter-spacing: .05rem;
   margin: 0 0 2% 0%;
-  padding: 0.2% 1.5% 0.2% 1.5%;
+  padding: 0.2% 1.5% 0.2% 1%;
   width: 100%;
 }
 
@@ -68,6 +68,8 @@ button {
   height: 25px;
   width: 25px;
   padding: 0 0 0 0;
+  margin: 0 2% 0 0;
+
 }
 
 #task-container {
@@ -97,6 +99,8 @@ h3 {
   font-weight: 700;
   font-size: 1rem;
   vertical-align: top;
+  margin: 0 0.5rem 0 0;
+  line-height: 24px;
 
 }
 
@@ -105,8 +109,7 @@ h3 {
   position: absolute;
   right: .55rem;
   top: 0.35rem;
-  height: 25px;
-  width: 25px;
+  margin: 0 0 0 0;
 }
 
 .delete-button:hover {
@@ -123,12 +126,10 @@ h3 {
 
 .importance-up-button {
   background: url("images/upvote.svg") no-repeat;
-  margin: 0 2% 0 0;
 
 } 
 .importance-down-button {
   background: url("images/downvote.svg") no-repeat;
-  margin: 0 2% 0 0;
 }
 
 .importance-up-button:hover {
@@ -139,15 +140,26 @@ h3 {
   background: url("images/downvote-hover.svg") no-repeat;
 }
 
-.importance-element {
-  line-height: 24px;
-  margin: 0 0 0 0.5rem;
+.importance-label {
+  /*line-height: 24px;*/
+  /*margin: 0 0.5rem 0 0.5rem;*/
 }
 
 .importance-value {
   line-height: 24px;
   font-family: "Open Sans", serif;
   font-weight: 400;
+}
+
+.task-complete {
+  float: right;
+  width: 28px;
+  height: 25px;
+  box-shadow: none;
+}
+
+.task-complete-label {
+  float: right;
 }
 
 hr {
@@ -188,7 +200,7 @@ hr {
   .task-element {
     width: 505px;
     height: 5%;
-    margin: 2% 0 2% 1px;
+    margin: 0 0 2% 1px;
     font-size: 1.2rem;
   }
 
@@ -196,9 +208,32 @@ hr {
     font-size: 1.2rem;
   }
 
+  h3 {
+    font-size: .8rem;
+    margin: 0 0.3rem 0 0;
+  }
+
+  button {
+    width: 20px;
+    height: 20px;
+    margin: 0 0.3rem 0 0;
+  }
+
+  .task-description {
+    padding: 0 0 0.5rem 0;
+  }
+
   .task-importance-element,
   .task-details {
     font-size: 1rem;
+  }
+
+  .task-complete {
+    height: 15px;
+  }
+
+  hr {
+  margin: 0.5rem 0 1rem 0;
   }
 
 }
