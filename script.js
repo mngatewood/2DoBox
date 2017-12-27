@@ -18,7 +18,7 @@ Card.prototype.createCard = function () {
     </article>`);
 }
 
-var qualityArray = ['None', 'Low', 'Normal', 'High', 'Critical'];
+var qualityArray = ['none', 'low', 'normal', 'high', 'critical'];
 
 function Card (title, body, uniqueId, quality) {
  this.title = title;
