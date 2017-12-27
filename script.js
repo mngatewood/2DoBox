@@ -4,6 +4,7 @@ Card.prototype.createCard = function () {
     `<article class="task-element" id="${this.uniqueId}">
     <h2>${this.title}</h2>
     <button type="image" src="images/delete.svg" class="delete-button" aria-label="delete task"></button>
+    <br>
     <p class="task-description" aria-label="task description">${this.body}</p>
     <form>
       <button type="image" src="images/upvote.svg" class="importance-up-button" aria-label="raise importance"></button>
