@@ -67,16 +67,16 @@ function parseFromStorage(object) {
 
 function upVoteStorage (event, object) {
   var $quality = $(event.target).siblings('.importance-value');
-  if ($quality.text() === 'None')  {
+  if ($quality.text() === 'none')  {
     object['quality'] = 1;
     stringToStorage(object);
-  } else if ($quality.text() === 'Low') {
+  } else if ($quality.text() === 'low') {
     object['quality'] = 2;
     stringToStorage(object);
-  } else if ($quality.text() === 'Normal') {
+  } else if ($quality.text() === 'normal') {
     object['quality'] = 3;
     stringToStorage(object);
-  } else if ($quality.text() === 'High') {
+  } else if ($quality.text() === 'high') {
     object['quality'] = 4;
     stringToStorage(object);
   }
@@ -84,16 +84,16 @@ function upVoteStorage (event, object) {
 
 function upVotePage (event, object) {
   var $quality = $(event.target).siblings('.importance-value');
-  if ($quality.text() === 'None')  {
+  if ($quality.text() === 'none')  {
     $quality.text(qualityArray[1]);
     stringToStorage(object);
-  } else if ($quality.text() === 'Low') {
+  } else if ($quality.text() === 'low') {
     $quality.text(qualityArray[2]);
     stringToStorage(object);
-  } else if ($quality.text() === 'Normal') {
+  } else if ($quality.text() === 'normal') {
     $quality.text(qualityArray[3]);
     stringToStorage(object);
-  } else if ($quality.text() === 'High') {
+  } else if ($quality.text() === 'high') {
     $quality.text(qualityArray[4]);
     stringToStorage(object);
   }
@@ -101,16 +101,16 @@ function upVotePage (event, object) {
 
 function downVoteStorage (event, object) {
   var $quality = $(event.target).siblings('.importance-value');
-  if ($quality.text() === 'Critical') {
+  if ($quality.text() === 'critical') {
     object['quality'] = 3;
     stringToStorage(object);
-  } else if ($quality.text() === 'High') {
+  } else if ($quality.text() === 'high') {
     object['quality'] = 2;
     stringToStorage(object);
-  } else if ($quality.text() === 'Normal') {
+  } else if ($quality.text() === 'normal') {
     object['quality'] = 1;
     stringToStorage(object);
-  } else if ($quality.text() === 'Low') {
+  } else if ($quality.text() === 'low') {
     object['quality'] = 0;
     stringToStorage(object);
   }
@@ -118,13 +118,13 @@ function downVoteStorage (event, object) {
 
 function downVotePage (event, object) {
   var $quality = $(event.target).siblings('.importance-value');
-  if ($quality.text() === 'Critical') {
+  if ($quality.text() === 'critical') {
     $quality.text(qualityArray[3]);
-  } else if ($quality.text() === 'High') {
+  } else if ($quality.text() === 'high') {
     $quality.text(qualityArray[2]);
-  } else if ($quality.text() === 'Normal') {
+  } else if ($quality.text() === 'normal') {
     $quality.text(qualityArray[1]);
-  } else if ($quality.text() === 'Low') {
+  } else if ($quality.text() === 'low') {
     $quality.text(qualityArray[0]);
   }
 }
@@ -173,6 +173,7 @@ $('#task-container').on('click', function(event) {
 });
 
 $('#task-container').on('click', '.importance-up-button', function(event) {
+  event.preventDefault();
   var parsedIdea = parseFromStorage(event);
   upVoteStorage(event, parsedIdea);
   upVotePage(event, parsedIdea);
@@ -180,6 +181,7 @@ $('#task-container').on('click', '.importance-up-button', function(event) {
 
 
 $('#task-container').on('click', '.importance-down-button', function(event) {
+  event.preventDefault();
   var parsedIdea = parseFromStorage(event);
   downVoteStorage(event, parsedIdea);
   downVotePage(event, parsedIdea)
