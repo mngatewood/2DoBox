@@ -4,6 +4,7 @@ Card.prototype.createCard = function () {
     `<article class="task-element" id="${this.uniqueId}">
     <h2>${this.title}</h2>
     <button type="image" src="images/delete.svg" class="delete-button" aria-label="delete task"></button>
+    <br>
     <p class="task-description" aria-label="task description">${this.body}</p>
     <form>
       <button type="image" src="images/upvote.svg" class="importance-up-button" aria-label="raise importance"></button>
@@ -36,13 +37,13 @@ function resetInputField () {
 }
 
 window.onload = function() {
-  persistIdea();
+  persistIdea(10);
   disableSaveButton();
   disableSeeMoreButton();
 }
 
-function persistIdea() {
-  for(i = 0; i < localStorage.length; i++) {
+function persistIdea(tasks) {
+  for(i = 0; i < tasks; i++) {
     var getObject = localStorage.getItem(localStorage.key(i));
     var obj = JSON.parse(getObject);
     var persistCard = new Card(obj.title, obj.body, obj.uniqueId, obj.quality);
@@ -66,16 +67,16 @@ function parseFromStorage(object) {
 
 function upVoteStorage (event, object) {
   var $quality = $(event.target).siblings('.importance-value');
-  if ($quality.text() === 'None')  {
+  if ($quality.text() === 'none')  {
     object['quality'] = 1;
     stringToStorage(object);
-  } else if ($quality.text() === 'Low') {
+  } else if ($quality.text() === 'low') {
     object['quality'] = 2;
     stringToStorage(object);
-  } else if ($quality.text() === 'Normal') {
+  } else if ($quality.text() === 'normal') {
     object['quality'] = 3;
     stringToStorage(object);
-  } else if ($quality.text() === 'High') {
+  } else if ($quality.text() === 'high') {
     object['quality'] = 4;
     stringToStorage(object);
   }
@@ -83,16 +84,16 @@ function upVoteStorage (event, object) {
 
 function upVotePage (event, object) {
   var $quality = $(event.target).siblings('.importance-value');
-  if ($quality.text() === 'None')  {
+  if ($quality.text() === 'none')  {
     $quality.text(qualityArray[1]);
     stringToStorage(object);
-  } else if ($quality.text() === 'Low') {
+  } else if ($quality.text() === 'low') {
     $quality.text(qualityArray[2]);
     stringToStorage(object);
-  } else if ($quality.text() === 'Normal') {
+  } else if ($quality.text() === 'normal') {
     $quality.text(qualityArray[3]);
     stringToStorage(object);
-  } else if ($quality.text() === 'High') {
+  } else if ($quality.text() === 'high') {
     $quality.text(qualityArray[4]);
     stringToStorage(object);
   }
@@ -100,16 +101,16 @@ function upVotePage (event, object) {
 
 function downVoteStorage (event, object) {
   var $quality = $(event.target).siblings('.importance-value');
-  if ($quality.text() === 'Critical') {
+  if ($quality.text() === 'critical') {
     object['quality'] = 3;
     stringToStorage(object);
-  } else if ($quality.text() === 'High') {
+  } else if ($quality.text() === 'high') {
     object['quality'] = 2;
     stringToStorage(object);
-  } else if ($quality.text() === 'Normal') {
+  } else if ($quality.text() === 'normal') {
     object['quality'] = 1;
     stringToStorage(object);
-  } else if ($quality.text() === 'Low') {
+  } else if ($quality.text() === 'low') {
     object['quality'] = 0;
     stringToStorage(object);
   }
@@ -117,13 +118,13 @@ function downVoteStorage (event, object) {
 
 function downVotePage (event, object) {
   var $quality = $(event.target).siblings('.importance-value');
-  if ($quality.text() === 'Critical') {
+  if ($quality.text() === 'critical') {
     $quality.text(qualityArray[3]);
-  } else if ($quality.text() === 'High') {
+  } else if ($quality.text() === 'high') {
     $quality.text(qualityArray[2]);
-  } else if ($quality.text() === 'Normal') {
+  } else if ($quality.text() === 'normal') {
     $quality.text(qualityArray[1]);
-  } else if ($quality.text() === 'Low') {
+  } else if ($quality.text() === 'low') {
     $quality.text(qualityArray[0]);
   }
 }
@@ -137,10 +138,10 @@ function disableSaveButton() {
 }
 
 function disableSeeMoreButton() {
-  if (localStorage.length > 10) {
-    $('#show-more-button').prop('disabled', false);
-  } else {
+  if (localStorage.length === $('.task-element').length) {
     $('#show-more-button').prop('disabled', true);
+  } else {
+    $('#show-more-button').prop('disabled', false);
   }
 }
 
@@ -172,6 +173,7 @@ $('#task-container').on('click', function(event) {
 });
 
 $('#task-container').on('click', '.importance-up-button', function(event) {
+  event.preventDefault();
   var parsedIdea = parseFromStorage(event);
   upVoteStorage(event, parsedIdea);
   upVotePage(event, parsedIdea);
@@ -179,6 +181,7 @@ $('#task-container').on('click', '.importance-up-button', function(event) {
 
 
 $('#task-container').on('click', '.importance-down-button', function(event) {
+  event.preventDefault();
   var parsedIdea = parseFromStorage(event);
   downVoteStorage(event, parsedIdea);
   downVotePage(event, parsedIdea)
@@ -221,4 +224,12 @@ $('#task-input').on('keyup', function () {
 
 $('.importance-filter-button').on('click', function(event) {
   toggleFilterButton();
+})
+
+$('#show-more-button').on('click', function() {
+  var tasksDisplayed = $('.task-element').length;
+  $('.task-element').remove();
+  var tasksToDisplay = Math.min( ( tasksDisplayed + 10), localStorage.length);
+  persistIdea(tasksToDisplay);
+  disableSeeMoreButton();
 })
