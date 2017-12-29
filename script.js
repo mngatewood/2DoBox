@@ -12,7 +12,7 @@ Card.prototype.createCard = function () {
       <h3 class="importance-label">importance: </h3>
       <h3 class="importance-value">${qualityArray[this.quality]}</h3>
       <label for="task-complete" aria-label="task complete"></label>
-      <input type="checkbox" id="task-complete" class="task-complete" name="task-complete"></input>
+      <input type="checkbox" id="task-complete" class="task-complete" name="task-complete"${checkedAttr}></input>
       <h3 class="task-complete-label">completed: </h3>
     </form>
     <hr>
@@ -26,8 +26,13 @@ function Card (title, body, uniqueId, quality, complete) {
  this.uniqueId = uniqueId || $.now();
  this.body = body;
  this.quality = quality || 0;
- this.complete = false;
-}
+ this.complete = false //delete this row
+//  if (complete = true) {
+//   checkedAttr = " checked";
+//   } else {
+//   checkedAttr = "";
+//   }
+// }
 
 function resetInputField () {
   $('#title-input').val('');
@@ -48,7 +53,7 @@ function persistIdea() {
     var getObject = localStorage.getItem(localStorage.key(i));
     var obj = JSON.parse(getObject);
     var persistCard = new Card(obj.title, obj.body, obj.uniqueId, obj.quality, obj.complete);
-    $('#task-complete').prop('checked', obj.complete);
+    $('#task-complete').prop('checked', obj.complete);  //delete this row
     persistCard.createCard();
   }
 }
