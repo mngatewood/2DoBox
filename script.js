@@ -78,8 +78,6 @@ function parseFromStorage(object) {
   return parsedTask;
 };
 
-
-
 function upVoteStorage (event, object) {
   var $quality = $(event.target).siblings('.importance-value');
   if ($quality.text() === 'none')  {
@@ -141,8 +139,8 @@ function downVotePage (event, object) {
     $quality.text(qualityArray[1]);
   } else if ($quality.text() === 'low') {
     $quality.text(qualityArray[0]);
-  }
-}
+  };
+};
 
 function disableSaveButton() {
   if ($('#title-input').val() === '' || $('#task-input').val() === '') {
@@ -185,7 +183,6 @@ $('#task-container').on('click', function(event) {
     localStorage.removeItem(taskId);
   };
   disableSeeMoreButton();
-
 });
 
 $('#task-container').on('click', '.importance-up-button', function(event) {
@@ -220,7 +217,6 @@ $('#task-container').on('click', 'p', function(event) {
     stringToStorage(parsedTask);
   });
 });
-
 
 $('#search-input').on('keyup', function() {
   var searchRequest = $('#search-input').val();
@@ -288,7 +284,6 @@ $('#filter-low').on('click', function() {
   });
 });
 
-
 $('#filter-normal').on('click', function() {
   $('.task-element').each(function(){
     var searchResult = $(this).text().indexOf('normal');
@@ -296,14 +291,12 @@ $('#filter-normal').on('click', function() {
   });
 });
 
-
 $('#filter-high').on('click', function() {
   $('.task-element').each(function(){
     var searchResult = $(this).text().indexOf('high');
     this.style.display = searchResult > -1 ? "" : "none";
   });
 });
-
 
 $('#filter-critical').on('click', function() {
   $('.task-element').each(function(){
