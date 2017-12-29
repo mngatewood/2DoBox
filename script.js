@@ -61,9 +61,7 @@ $('#show-more-button').on('click', function() {
   $('.task-element').remove();
   var persistStart = Math.max((localStorage.length - tasksDisplayed - 10), 0);
   persistTask(persistStart);
-  if (tasksDisplayed == localStorage.length) {
   disableSeeMoreButton();
-  };
 });
 
 
@@ -165,10 +163,11 @@ function disableSaveButton() {
 };
 
 function disableSeeMoreButton() {
-  if (localStorage.length > 10) {
-    $('#show-more-button').prop('disabled', false);
-  } else {
+  var tasksDisplayed = $('.task-element').length;
+  if (tasksDisplayed == localStorage.length) {
     $('#show-more-button').prop('disabled', true);
+  } else {
+    $('#show-more-button').prop('disabled', false);
   };
 };
 
