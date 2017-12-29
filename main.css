@@ -83,14 +83,88 @@ input[type="submit"]:hover{
   margin-top: 12.4%;
 }
 
+#filter-container {
+  padding: 2% 0 2% 0;
+}
+
+#main-menu {
+  display: flex;
+  width: 70%;
+  align-content: center;
+  margin: auto;
+}
+
+#main-menu button {
+  background-color: #00A79D ;
+  color: #FFFFFF ;
+  font-size: 1.3rem;
+  padding: 0.3rem;
+  width: 33.33%;
+  border: 2px solid #E5F3F2;
+}
+
 #search-container {
   text-align: center;
-  width: 100%;
+  width: 70%;
+  margin: auto;
 }
 
 #search-input {
-  margin: 2% 0 2% 0;
-  width: 70%;
+  font-size: 1.3rem;
+  margin: 0;
+  width: 99.5%;
+  border: 2px solid #E5F3F2;
+  padding: 0.3rem;
+}
+
+#importance-filter-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: auto;
+}
+
+.importance-filter-button {
+  background-color: #00A79D ;
+  color: #FFFFFF ;
+  font-size: 1.3rem;
+  width: 20%;
+  /*border-radius: 2rem;*/
+  margin: 0 0 0 0;
+  padding: 0.3rem;
+}
+
+#show-completed-container {
+    border: 2px solid #E5F3F2;
+    padding: 0.3rem;
+}
+
+#show-completed-container label {
+  font-size: 1.3rem;
+  color: #939598;
+}
+
+#show-completed-tasks {
+  height: 25px;
+  width: 25px;
+  box-shadow: none;
+  margin: 0 0 0 0;
+  vertical-align: bottom;
+  position: relative;
+}
+
+#search-container.hidden,
+#importance-filter-container.hidden,
+#show-completed-container.hidden {
+  display: none;
+}
+
+#text-filter.inactive,
+#importance-filter.inactive,
+#completed-filter.inactive {
+  background-color: #F5F5F5;
+  color: #00A79D;
+
 }
 
 h4 {
@@ -99,24 +173,7 @@ h4 {
   margin: 0 0 0.5rem 0;
 }
 
-#importance-filter-container {
-  display: flex;
-  justify-content: space-between;
-  width: 70%;
-  margin: auto;
-}
-
-.importance-filter-button {
-  background-color: #00A79D ;
-  color: #FFFFFF ;
-  font-size: 1.5rem;
-  width: 19%;
-  border-radius: 2rem;
-  margin: 0 0 4% 0;
-  padding: 1% 1% 1% 1%;
-}
-
-button {
+article button {
   display: inline-block;
   height: 25px;
   width: 25px;
@@ -284,7 +341,7 @@ hr {
     margin: 0 0.3rem 0 0;
   }
 
-  button {
+  article button {
     width: 20px;
     height: 20px;
     margin: 0 0.3rem 0 0;

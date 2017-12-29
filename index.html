@@ -26,19 +26,41 @@
      &nbsp
     </div>
     <main id="main-container" role="main">
-      <section id="search-container" role="search">
-        <form>
-          <label for="search-input"></label>
-          <input id="search-input" type="text" placeholder="Filter by text">
-          <h4>Filter by importance</h4>
-          <div id="importance-filter-container">
-            <input id="filter-none" class="importance-filter-button" type="button" value="none">
-            <input id="filter-low" class="importance-filter-button" type="button" value="low">
-            <input id="filter-normal" class="importance-filter-button" type="button" value="normal">
-            <input id="filter-high" class="importance-filter-button" type="button" value="high">
-            <input id="filter-critical" class="importance-filter-button" type="button" value="critical">
-          </div>
-        </form>
+
+
+      <section id="filter-container">
+
+        <div id="main-menu">
+          <button id="text-filter">Fiter by text</button>
+          <button id="importance-filter" class="inactive">Fiter by importance</button>
+          <button id="completed-filter" class="inactive">Show completed tasks</button>
+        </div>
+        <div id="sub-menu">
+
+          <form>
+            <div id="search-container">
+              <label for="search-input"></label>
+              <input id="search-input" type="text" placeholder="Filter by text">
+
+            <div id="importance-filter-container" class="hidden">
+              <input id="filter-none" class="importance-filter-button" type="button" value="none">
+              <input id="filter-low" class="importance-filter-button" type="button" value="low">
+              <input id="filter-normal" class="importance-filter-button" type="button" value="normal">
+              <input id="filter-high" class="importance-filter-button" type="button" value="high">
+              <input id="filter-critical" class="importance-filter-button" type="button" value="critical">
+            </div>
+
+            <div id="show-completed-container" class="hidden">
+              <label for="show-completed-tasks" aria-label="show completed tasks">Show completed tasks: </label>
+              <input type="checkbox" id="show-completed-tasks" name="show-completed-taskse"></input>
+            </div>
+          </form>
+
+
+        </div>
+          
+
+
       </section>
       <section id="task-container">
       </section>
