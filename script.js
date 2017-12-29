@@ -219,9 +219,9 @@ $('#task-container').on('click', 'p', function(event) {
 });
 
 $('#search-input').on('keyup', function() {
-  var searchRequest = $('#search-input').val();
+  var searchRequest = $('#search-input').val().toLowerCase();
   $('.task-element').each(function(){
-    var searchResult = $(this).text().indexOf(searchRequest);
+    var searchResult = $(this).text().toLowerCase().indexOf(searchRequest);
     this.style.display = searchResult > -1 ? "" : "none";
   });
 });
