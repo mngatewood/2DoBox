@@ -39,12 +39,12 @@ function resetInputField () {
 };
 
 window.onload = function() {
-  persistIdea();
+  persistTask();
   disableSaveButton();
   disableSeeMoreButton();
 };
 
-function persistIdea() {
+function persistTask() {
   for(i = 0; i < localStorage.length; i++) {
     var getObject = localStorage.getItem(localStorage.key(i));
     var obj = JSON.parse(getObject);
@@ -55,7 +55,7 @@ function persistIdea() {
   };
 };
 
-function persistCompletedIdea() {
+function persistCompletedTask() {
   for(i = 0; i < localStorage.length; i++) {
     var getObject = localStorage.getItem(localStorage.key(i));
     var obj = JSON.parse(getObject);
@@ -73,9 +73,9 @@ function stringToStorage(object) {
 
 function parseFromStorage(object) {
   var key = $(object.target).closest('article').attr('id');
-  var retrievedIdea = localStorage.getItem(key);
-  var parsedIdea = JSON.parse(retrievedIdea);
-  return parsedIdea;
+  var retrievedTask = localStorage.getItem(key);
+  var parsedTask = JSON.parse(retrievedTask);
+  return parsedTask;
 };
 
 
@@ -179,9 +179,9 @@ $('#save-button').on('click', function(event){
 
 $('#task-container').on('click', function(event) {
   if (event.target.className === 'delete-button') {
-    var ideaId = event.target.closest('.task-element').id;
-    $(`#${ideaId}`).remove();
-    localStorage.removeItem(ideaId);
+    var taskId = event.target.closest('.task-element').id;
+    $(`#${taskId}`).remove();
+    localStorage.removeItem(taskId);
   };
   disableSeeMoreButton();
 
@@ -189,34 +189,34 @@ $('#task-container').on('click', function(event) {
 
 $('#task-container').on('click', '.importance-up-button', function(event) {
   event.preventDefault();
-  var parsedIdea = parseFromStorage(event);
-  upVoteStorage(event, parsedIdea);
-  upVotePage(event, parsedIdea);
+  var parsedTask = parseFromStorage(event);
+  upVoteStorage(event, parsedTask);
+  upVotePage(event, parsedTask);
 });
 
 
 $('#task-container').on('click', '.importance-down-button', function(event) {
   event.preventDefault();
-  var parsedIdea = parseFromStorage(event);
-  downVoteStorage(event, parsedIdea);
-  downVotePage(event, parsedIdea)
+  var parsedTask = parseFromStorage(event);
+  downVoteStorage(event, parsedTask);
+  downVotePage(event, parsedTask)
 });
 
 $('#task-container').on('click', 'h2', function(event) {
   $(this).prop('contenteditable', true).focus();
   $(this).focusout( function() {
-    var parsedIdea = parseFromStorage(event);
-    parsedIdea['title'] = $(this).html();
-    stringToStorage(parsedIdea);
+    var parsedTask = parseFromStorage(event);
+    parsedTask['title'] = $(this).html();
+    stringToStorage(parsedTask);
   });
 });
 
 $('#task-container').on('click', 'p', function(event) {
   $(this).prop('contenteditable', true).focus();
   $(this).focusout( function() {
-    var parsedIdea = parseFromStorage(event);
-    parsedIdea['body'] = $(this).html();
-    stringToStorage(parsedIdea);
+    var parsedTask = parseFromStorage(event);
+    parsedTask['body'] = $(this).html();
+    stringToStorage(parsedTask);
   });
 });
 
@@ -242,23 +242,23 @@ $('.importance-filter-button').on('click', function(event) {
 });
 
 $('#task-container').on('click', '.task-complete', function(event) {
-  var parsedIdea = parseFromStorage(event);
+  var parsedTask = parseFromStorage(event);
   if (this.checked) {
-    parsedIdea['complete'] = 'checked';
-    parsedIdea['textDeco'] = 'line-through';
+    parsedTask['complete'] = 'checked';
+    parsedTask['textDeco'] = 'line-through';
   $(this).parent('form').siblings('h2, p').css('text-decoration', 'line-through');
-    stringToStorage(parsedIdea);
+    stringToStorage(parsedTask);
   } else {
-    parsedIdea['complete'] = ' ';
-    parsedIdea['textDeco'] = 'none';
+    parsedTask['complete'] = ' ';
+    parsedTask['textDeco'] = 'none';
     $(this).parent('form').siblings('h2, p').css('text-decoration', 'none');
-    stringToStorage(parsedIdea);
+    stringToStorage(parsedTask);
   };
 });
 
 $('#show-completed-tasks').on('click', function(){
   if (this.checked) {
-    persistCompletedIdea();
+    persistCompletedTask();
   } else {
     location.reload();
   };
