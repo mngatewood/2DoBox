@@ -327,3 +327,8 @@ $('#completed-filter').on('click', function () {
   $('#importance-filter-container').addClass('hidden');
   $('#show-completed-container').removeClass('hidden');
 });
+
+$('#importance-filter-container').on('click', '.importance-filter-button', function() {
+  $(this).removeClass('inactive');
+  $(this).siblings('.importance-filter-button').addClass('inactive');
+})
