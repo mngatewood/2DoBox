@@ -14,11 +14,11 @@
         <h1>2Do<span id="h1-style">Box</span></h1>
         <form>
           <label for="title-input"></label>
-          <input id="title-input" type="text" placeholder="Title">
+          <input id="title-input" type="text" placeholder="Title" tabindex="1" role="textbox" autofocus>
           <label for="task-input"></label>
-          <input id="task-input" type="text" placeholder="Task">
+          <input id="task-input" type="text" placeholder="Task" tabindex="2" role="textbox">
           <label for="save-button"></label>
-          <input id="save-button" type="submit" value="save">
+          <input id="save-button" type="submit" value="save" tabindex="3" aria-label="save">
         </form>
       </section>
     </header>
@@ -27,37 +27,36 @@
     </div>
     <main id="main-container" role="main">
       <section id="filter-container">
-        <div id="main-menu">
-          <button id="text-filter">Fiter by text</button>
-          <button id="importance-filter" class="inactive">Filter by importance</button>
-          <button id="completed-filter" class="inactive">Show completed</button>
+        <div id="main-menu" role="menubar">
+          <button id="text-filter" tabindex="4" role="menuitem">Fiter by text</button>
+          <button id="importance-filter" tabindex="6" role="menuitem" class="inactive">Filter by importance</button>
+          <button id="completed-filter" role="menuitem"  tabindex="12" class="inactive">Show completed</button>
         </div>
-        <div id="sub-menu">
+        <div id="sub-menu" role="menu">
           <form>
-            <div id="search-container">
+            <div id="search-container" aria-label="filter by text">
               <label for="search-input"></label>
-              <input id="search-input" type="text" placeholder="Filter by text">
+              <input id="search-input" type="text" placeholder="Filter by text"  tabindex="5"role="search">
             </div>
-
-            <div id="importance-filter-container" class="hidden">
-              <input id="filter-none" class="importance-filter-button" type="button" value="none">
-              <input id="filter-low" class="importance-filter-button" type="button" value="low">
-              <input id="filter-normal" class="importance-filter-button" type="button" value="normal">
-              <input id="filter-high" class="importance-filter-button" type="button" value="high">
-              <input id="filter-critical" class="importance-filter-button" type="button" value="critical">
+            <div id="importance-filter-container" aria-label="filter by importance" class="hidden">
+              <input id="filter-none" class="importance-filter-button" type="button" value="none"  tabindex="7">
+              <input id="filter-low" class="importance-filter-button" type="button" value="low"  tabindex="8">
+              <input id="filter-normal" class="importance-filter-button" type="button" value="normal" tabindex="9">
+              <input id="filter-high" class="importance-filter-button" type="button" value="high" tabindex="10">
+              <input id="filter-critical" class="importance-filter-button" type="button" value="critical" tabindex="11">
             </div>
-            <div id="show-completed-container" class="hidden">
-              <label for="show-completed-tasks" aria-label="show completed tasks">Show completed tasks: </label>
-              <input type="checkbox" id="show-completed-tasks" name="show-completed-tasks"></input>
+            <div id="show-completed-container" aria-label="show completed tasks" class="hidden">
+              <label for="show-completed-tasks">Show completed tasks: </label>
+              <input type="checkbox" id="show-completed-tasks" name="show-completed-tasks" tabindex="13" role="checkbox"></input>
             </div>
           </form>
         </div>
       </section>
-      <section id="task-container">
+      <section id="task-container" aria-label="task list" role="list">
       </section>
     </main>
     <footer role="footer">
-      <input id="show-more-button" type="button" value="show more">
+      <input id="show-more-button" type="button" value="show more" aria-label="show more tasks">
     </footer>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="script.js"></script>

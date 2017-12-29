@@ -1,19 +1,19 @@
 
 Card.prototype.createCard = function () {
   $('#task-container').prepend(
-    `<article class="task-element" id="${this.uniqueId}">
-    <h2 style="text-decoration: ${this.textDeco}">${this.title}</h2>
-    <button type="image" src="images/delete.svg" class="delete-button" aria-label="delete task"></button>
+    `<article class="task-element" id="${this.uniqueId}" aria-label="task" role="listitem">
+    <h2 tabindex="99" aria-label="task title" style="text-decoration: ${this.textDeco}">${this.title}</h2>
     <br>
-    <p class="task-description" aria-label="task description" style="text-decoration: ${this.textDeco}">${this.body}</p>
+    <p class="task-description" aria-label="task description" tabindex="99" style="text-decoration: ${this.textDeco}">${this.body}</p>
     <form>
-      <button type="image" src="images/upvote.svg" class="importance-up-button" aria-label="raise importance"></button>
-      <button type="image" src="images/downvote.svg" class="importance-down-button" aria-label="lower importance"></button>
+      <button type="image" src="images/upvote.svg" alt="raise importance" class="importance-up-button" tabindex="99" aria-label="raise importance"></button>
+      <button type="image" src="images/downvote.svg" alt="lower importance" class="importance-down-button" tabindex="99" aria-label="lower importance"></button>
       <h3 class="importance-label">importance: </h3>
-      <h3 class="importance-value">${qualityArray[this.quality]}</h3>
+      <h3 class="importance-value" tabindex="99" aria-label="importance">${qualityArray[this.quality]}</h3>
       <label for="task-complete" aria-label="task complete"></label>
-      <input type="checkbox" id="task-complete" class="task-complete" name="task-complete" ${this.complete}></input>
+      <input type="checkbox" id="task-complete" class="task-complete" name="task-complete" tabindex="99" aria-label="task complete" ${this.complete}></input>
       <h3 class="task-complete-label">completed: </h3>
+      <button type="image" src="images/delete.svg" class="delete-button" alt="delete task" tabindex="99" aria-label="delete task"></button>
     </form>
     <hr>
     </article>`);
