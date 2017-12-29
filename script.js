@@ -39,12 +39,12 @@ function resetInputField () {
 };
 
 window.onload = function() {
-  persistTask(localStorage.length - 10);
+  persistTask((Math.max(localStorage.length - 10), 0));
   disableSaveButton();
   disableSeeMoreButton();
 };
 
-function persistTask(persistStart, persistEnd) {
+function persistTask(persistStart) {
   for (i = persistStart; i < localStorage.length; i++) {
     var getObject = localStorage.getItem(localStorage.key(i));
     var obj = JSON.parse(getObject);
@@ -261,7 +261,8 @@ $('#show-completed-tasks').on('click', function(){
   if (this.checked) {
     persistCompletedTask();
   } else {
-    location.reload();
+    $('.task-element').remove();
+    persistTask((Math.max((localStorage.length - 10), 0)))
   };
 });
 
