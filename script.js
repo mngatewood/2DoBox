@@ -2,17 +2,17 @@
 Card.prototype.createCard = function () {
   $('#task-container').prepend(
     `<article class="task-element" id="${this.uniqueId}">
-    <h2>${this.title}</h2>
+    <h2 style="text-decoration: ${this.textDeco}">${this.title}</h2>
     <button type="image" src="images/delete.svg" class="delete-button" aria-label="delete task"></button>
     <br>
-    <p class="task-description" aria-label="task description">${this.body}</p>
+    <p class="task-description" aria-label="task description" style="text-decoration: ${this.textDeco}">${this.body}</p>
     <form>
       <button type="image" src="images/upvote.svg" class="importance-up-button" aria-label="raise importance"></button>
       <button type="image" src="images/downvote.svg" class="importance-down-button" aria-label="lower importance"></button>
       <h3 class="importance-label">importance: </h3>
       <h3 class="importance-value">${qualityArray[this.quality]}</h3>
       <label for="task-complete" aria-label="task complete"></label>
-      <input type="checkbox" id="task-complete" class="task-complete" name="task-complete"${checkedAttr}></input>
+      <input type="checkbox" id="task-complete" class="task-complete" name="task-complete" ${this.complete}></input>
       <h3 class="task-complete-label">completed: </h3>
     </form>
     <hr>
@@ -21,18 +21,14 @@ Card.prototype.createCard = function () {
 
 var qualityArray = ['none', 'low', 'normal', 'high', 'critical'];
 
-function Card (title, body, uniqueId, quality, complete) {
+function Card (title, body, uniqueId, quality, complete, textDeco) {
  this.title = title;
  this.uniqueId = uniqueId || $.now();
  this.body = body;
  this.quality = quality || 0;
- this.complete = false //delete this row
-//  if (complete = true) {
-//   checkedAttr = " checked";
-//   } else {
-//   checkedAttr = "";
-//   }
-// }
+ this.complete = complete;
+ this.textDeco = textDeco;
+}
 
 function resetInputField () {
   $('#title-input').val('');
@@ -52,11 +48,24 @@ function persistIdea() {
   for(i = 0; i < localStorage.length; i++) {
     var getObject = localStorage.getItem(localStorage.key(i));
     var obj = JSON.parse(getObject);
-    var persistCard = new Card(obj.title, obj.body, obj.uniqueId, obj.quality, obj.complete);
-    $('#task-complete').prop('checked', obj.complete);  //delete this row
+    var persistCard = new Card(obj.title, obj.body, obj.uniqueId, obj.quality, obj.complete, obj.textDeco);
+    console.log(persistCard.complete)
+    if (persistCard.complete == 'checked') {    
+    } else {
     persistCard.createCard();
+    }
   }
 }
+
+$('#search-input').on('keyup', function() {
+  var searchRequest = $('#search-input').val();
+  $('.task-element').each(function(){
+    var searchResult = $(this).text().indexOf(searchRequest);
+    this.style.display = searchResult > -1 ? "" : "none";
+  })
+})
+
+
 
 function stringToStorage(object) {
   var stringifyObject = JSON.stringify(object);
@@ -236,11 +245,13 @@ $('.importance-filter-button').on('click', function(event) {
 $('#task-container').on('click', '.task-complete', function(event) {
   var parsedIdea = parseFromStorage(event);
   if (this.checked) {
-    parsedIdea['complete'] = this.checked;
+    parsedIdea['complete'] = 'checked';
+    parsedIdea['textDeco'] = 'line-through';
   $(this).parent('form').siblings('h2, p').css('text-decoration', 'line-through');
     stringToStorage(parsedIdea);
   } else {
-    parsedIdea['complete'] = this.checked;
+    parsedIdea['complete'] = ' ';
+    parsedIdea['textDeco'] = 'none';
     $(this).parent('form').siblings('h2, p').css('text-decoration', 'none');
     stringToStorage(parsedIdea);
   }
