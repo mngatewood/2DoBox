@@ -98,7 +98,7 @@ input[type="submit"]:hover{
 #main-menu button {
   background-color: #00A79D ;
   color: #FFFFFF ;
-  font-size: 1.1rem;
+  font-size: 1rem;
   padding: 0.43rem;
   width: 34%;
   border: 2px solid #E5F3F2;
@@ -160,8 +160,7 @@ input[type="submit"]:hover{
 
 #search-container.hidden,
 #importance-filter-container.hidden,
-#show-completed-container.hidden 
-{
+#show-completed-container.hidden {
   display: none;
 }
 
@@ -170,7 +169,6 @@ input[type="submit"]:hover{
 #completed-filter.inactive {
   background-color: #F5F5F5;
   color: #00A79D;
-
 }
 
 h4 {
@@ -185,14 +183,12 @@ article button {
   width: 25px;
   padding: 0 0 0 0;
   margin: 0 2% 0 0;
-
 }
 
 #task-container {
   align-items: center;
   display: flex;
   flex-direction: column;
-
 }
 
 .task-element {
@@ -217,7 +213,6 @@ h3 {
   vertical-align: top;
   margin: 0 0.5rem 0 0;
   line-height: 24px;
-
 }
 
 .delete-button {
@@ -243,7 +238,6 @@ h3 {
 
 .importance-up-button {
   background: url("images/upvote.svg") no-repeat;
-
 } 
 .importance-down-button {
   background: url("images/downvote.svg") no-repeat;
@@ -295,8 +289,7 @@ hr {
     width: 50%;
   }
 
-  input,
-  .importance-filter-button {
+  input {
     height: 5%; 
     margin: 1.1% 0 1.2% 0;
     font-size: 1.2rem;
@@ -337,9 +330,9 @@ hr {
   margin: 0 0 0.3rem 0;
   }
 
-  .importance-filter-button {
+  #filter-container {
+    padding: 3.5% 0 3% 0;
   }
-
 
   .task-element {
     width: 505px;
@@ -405,24 +398,46 @@ hr {
     margin: 12% 0 0 0;
   }
 
-  #main-menu {
+  #sub-menu {
     width: 95vw;
     margin: auto;
   }
 
   #search-input {
-    width: 95vw;
-    margin: 0% 0 2% 0;
+    width: 94vw;
+    margin: auto;
+    font-size: 1rem;
+    padding: 1.2%;
   }
 
+  #show-completed-container {
+    width: 95vw;
+    padding: 0.8%;
+  }
+
+  #show-completed-container label {
+    font-size: 0.8rem;
+  }
+
+  #show-completed-tasks {
+    height: 20px;
+    width: 20px;
+  }
+
+  #main-menu,
+  #filter-container,
+  #search-container,
   #importance-filter-container {
     width: 95vw;
   }
 
-  .importance-filter-button {
-    width: 17%;
+  #main-menu button {
     font-size: 0.8rem;
-    border-radius: 0.7rem;
+    padding: 1%;
+  }
+
+  .importance-filter-button {
+    font-size: 0.8rem;
   }
 
   footer {
@@ -434,8 +449,10 @@ hr {
     margin: auto;
   }
 
-
-  
+  #filter-container {
+    padding: 4.5% 0 3% 0;
+  }
+ 
 }
 
 @media screen and (max-width: 320px) {
@@ -457,10 +474,25 @@ hr {
     height: 25px;
     width: 300px;
     margin: 3px 0 3px 0px;
+    font-size: 1.2rem;
   }
 
   #save-button {
     height: 30px;
+  }
+
+  #filter-container {
+    align-content: center;
+    padding: 2% 0 5% 0;
+  }
+
+  #main-menu,
+  #sub-menu {
+    margin: 0 0 0 -3px;
+  }
+
+  #sub-menu #search-input {
+    width: 295px;
   }
 
   h1,
@@ -469,14 +501,14 @@ hr {
   #importance-filter-container,
   footer,
   #show-more-button,
-  /*#main-container,*/
-  #spacer {
+  #spacer,
+  #filter-container,
+  #main-menu,
+  #sub-menu,
+  #search-container,
+  #importance-filter-container,
+  #show-completed-container {
     width: 300px;
   }
-
-  .importance-filter-button {
-    font-size: 0.6rem;
-  }
-
   
 }
