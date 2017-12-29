@@ -21,11 +21,12 @@ Card.prototype.createCard = function () {
 
 var qualityArray = ['none', 'low', 'normal', 'high', 'critical'];
 
-function Card (title, body, uniqueId, quality) {
+function Card (title, body, uniqueId, quality, complete) {
  this.title = title;
  this.uniqueId = uniqueId || $.now();
  this.body = body;
  this.quality = quality || 0;
+ this.complete = false;
 }
 
 function resetInputField () {
@@ -46,7 +47,8 @@ function persistIdea() {
   for(i = 0; i < localStorage.length; i++) {
     var getObject = localStorage.getItem(localStorage.key(i));
     var obj = JSON.parse(getObject);
-    var persistCard = new Card(obj.title, obj.body, obj.uniqueId, obj.quality);
+    var persistCard = new Card(obj.title, obj.body, obj.uniqueId, obj.quality, obj.complete);
+    $('#task-complete').prop('checked', obj.complete);
     persistCard.createCard();
   }
 }
@@ -224,4 +226,17 @@ $('#task-input').on('keyup', function () {
 
 $('.importance-filter-button').on('click', function(event) {
   toggleFilterButton();
+})
+
+$('#task-container').on('click', '.task-complete', function(event) {
+  var parsedIdea = parseFromStorage(event);
+  if (this.checked) {
+    parsedIdea['complete'] = this.checked;
+  $(this).parent('form').siblings('h2, p').css('text-decoration', 'line-through');
+    stringToStorage(parsedIdea);
+  } else {
+    parsedIdea['complete'] = this.checked;
+    $(this).parent('form').siblings('h2, p').css('text-decoration', 'none');
+    stringToStorage(parsedIdea);
+  }
 })
