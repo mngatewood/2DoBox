@@ -3,6 +3,7 @@ border:0;
 margin:0;
 padding:0;
 box-sizing: border-box;
+box-shadow: none;
 }
 
 body {
@@ -98,8 +99,8 @@ input[type="submit"]:hover{
   background-color: #00A79D ;
   color: #FFFFFF ;
   font-size: 1.1rem;
-  padding: 0.3rem;
-  width: 33.33%;
+  padding: 0.43rem;
+  width: 34%;
   border: 2px solid #E5F3F2;
   height: 2.5rem;
 }
@@ -113,7 +114,7 @@ input[type="submit"]:hover{
 #search-input {
   font-size: 1.3rem;
   margin: 0;
-  width: 99.5%;
+  width: 100%;
   border: 2px solid #E5F3F2;
   padding: 0.3rem;
 }
@@ -121,7 +122,7 @@ input[type="submit"]:hover{
 #importance-filter-container {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 70%;
   margin: auto;
 }
 
@@ -130,18 +131,20 @@ input[type="submit"]:hover{
   color: #FFFFFF ;
   font-size: 1.3rem;
   width: 20%;
-  /*border-radius: 2rem;*/
   margin: 0 0 0 0;
-  padding: 0.3rem;
+  padding: 0.4rem;
 }
 
 #show-completed-container {
+  width: 70%;
     border: 2px solid #E5F3F2;
-    padding: 0.3rem;
+    padding: 0.28rem;
+    margin: auto;
+    text-align: center;
 }
 
 #show-completed-container label {
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   color: #939598;
 }
 
@@ -152,11 +155,12 @@ input[type="submit"]:hover{
   margin: 0 0 0 0;
   vertical-align: bottom;
   position: relative;
+  top: 2px;
 }
 
 #search-container.hidden,
 #importance-filter-container.hidden,
-/*#show-completed-container.hidden */
+#show-completed-container.hidden 
 {
   display: none;
 }
@@ -320,6 +324,10 @@ hr {
     margin: auto;
   }
 
+  #main-menu button {
+    font-size: 1rem;
+  }
+
   #search-input {
     width: 100%
   }
@@ -330,10 +338,6 @@ hr {
   }
 
   .importance-filter-button {
-    width: 96px;
-    border-radius: 1rem;
-    margin: 0 0 4% 0;
-    height: 2rem;
   }
 
 
