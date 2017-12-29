@@ -39,13 +39,13 @@ function resetInputField () {
 };
 
 window.onload = function() {
-  persistTask();
+  persistTask(localStorage.length - 10);
   disableSaveButton();
   disableSeeMoreButton();
 };
 
-function persistTask() {
-  for(i = 0; i < localStorage.length; i++) {
+function persistTask(persistStart, persistEnd) {
+  for (i = persistStart; i < localStorage.length; i++) {
     var getObject = localStorage.getItem(localStorage.key(i));
     var obj = JSON.parse(getObject);
     var persistCard = new Card(obj.title, obj.body, obj.uniqueId, obj.quality, obj.complete, obj.textDeco);
@@ -55,8 +55,20 @@ function persistTask() {
   };
 };
 
+
+$('#show-more-button').on('click', function() {
+  var tasksDisplayed = $('.task-element').length;
+  $('.task-element').remove();
+  var persistStart = Math.max((localStorage.length - tasksDisplayed - 10), 0);
+  persistTask(persistStart);
+  if (tasksDisplayed == localStorage.length) {
+  disableSeeMoreButton();
+  };
+});
+
+
 function persistCompletedTask() {
-  for(i = 0; i < localStorage.length; i++) {
+  for (i = 0; i < localStorage.length; i++) {
     var getObject = localStorage.getItem(localStorage.key(i));
     var obj = JSON.parse(getObject);
     var persistCard = new Card(obj.title, obj.body, obj.uniqueId, obj.quality, obj.complete, obj.textDeco);
@@ -263,3 +275,4 @@ $('#show-completed-tasks').on('click', function(){
     location.reload();
   };
 });
+
