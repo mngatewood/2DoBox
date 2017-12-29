@@ -97,10 +97,11 @@ input[type="submit"]:hover{
 #main-menu button {
   background-color: #00A79D ;
   color: #FFFFFF ;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   padding: 0.3rem;
   width: 33.33%;
   border: 2px solid #E5F3F2;
+  height: 2.5rem;
 }
 
 #search-container {
@@ -155,7 +156,8 @@ input[type="submit"]:hover{
 
 #search-container.hidden,
 #importance-filter-container.hidden,
-#show-completed-container.hidden {
+/*#show-completed-container.hidden */
+{
   display: none;
 }
 
@@ -307,9 +309,18 @@ hr {
     margin-top: 45px;    
   }
 
-  #search-input, 
-  #importance-filter-container {
+  #filter-container,
+  #main-menu,
+  #sub-menu,
+  #search-container,
+  #importance-filter-container,
+  #show-completed-container {
     width: 505px;
+    margin: auto;
+  }
+
+  #search-input {
+    width: 100%
   }
 
   h4 {

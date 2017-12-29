@@ -33,12 +33,12 @@
         <div id="main-menu">
           <button id="text-filter">Fiter by text</button>
           <button id="importance-filter" class="inactive">Fiter by importance</button>
-          <button id="completed-filter" class="inactive">Show completed tasks</button>
+          <button id="completed-filter" class="inactive">Show completed</button>
         </div>
         <div id="sub-menu">
 
           <form>
-            <div id="search-container">
+            <div id="search-container" class="hidden">
               <label for="search-input"></label>
               <input id="search-input" type="text" placeholder="Filter by text">
 
@@ -50,9 +50,9 @@
               <input id="filter-critical" class="importance-filter-button" type="button" value="critical">
             </div>
 
-            <div id="show-completed-container" class="hidden">
+            <div id="show-completed-container">
               <label for="show-completed-tasks" aria-label="show completed tasks">Show completed tasks: </label>
-              <input type="checkbox" id="show-completed-tasks" name="show-completed-taskse"></input>
+              <input type="checkbox" id="show-completed-tasks" name="show-completed-tasks"></input>
             </div>
           </form>
 
