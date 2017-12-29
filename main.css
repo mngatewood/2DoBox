@@ -114,7 +114,7 @@ input[type="submit"]:hover{
 #search-input {
   font-size: 1.3rem;
   margin: 0;
-  width: 100%;
+  width: 99.7%;
   border: 2px solid #E5F3F2;
   padding: 0.3rem;
 }
@@ -329,7 +329,7 @@ hr {
   }
 
   #search-input {
-    width: 100%
+    width: 99.2%
   }
 
   h4 {
@@ -386,7 +386,6 @@ hr {
 
   #input-content {
     width: 95vw;
-    /*margin: 0 0 2.5% 0;*/
   }
 
   #title-input
@@ -406,9 +405,14 @@ hr {
     margin: 12% 0 0 0;
   }
 
+  #main-menu {
+    width: 95vw;
+    margin: auto;
+  }
+
   #search-input {
     width: 95vw;
-    margin: 3% 0 2% 0;
+    margin: 0% 0 2% 0;
   }
 
   #importance-filter-container {
