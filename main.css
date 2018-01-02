@@ -1,9 +1,8 @@
 * {
-border:0;
-margin:0;
-padding:0;
+border: 0;
+margin: 0;
+padding: 0;
 box-sizing: border-box;
-box-shadow: none;
 }
 
 body {
@@ -11,9 +10,10 @@ body {
   font-size: 12px;
 }
 
+/* Header */
+
 #input-container {
   background-color: #E5F3F2 ;
-  justify-content: center;
   position: fixed;
   width: 100%;
   z-index: 1;
@@ -39,19 +39,17 @@ h1 {
 }
 
 input {
-  align-self: center;
   border: solid #D1D3D4 0.5px;
-  box-shadow: 0 0 0 .1rem rgba(187,189,191,0.3);
+  box-shadow: 0 0 0 0.1rem #BBBDBF; 
   color: #939598 ;
   font-size: 1.5rem;
-  letter-spacing: .05rem;
-  margin: 0 0 2% 0%;
+  letter-spacing: 0.05rem;
+  margin: 0 0 2% 0;
   padding: 0.2% 1.5% 0.2% 1%;
   width: 100%;
 }
 
-#save-button,
-#show-more-button {
+#save-button {
   background-color: #00A79D ;
   color: #FFFFFF ;
   font-size: 1.5rem;
@@ -60,29 +58,14 @@ input {
   width: 100%;
 }
 
-.importance-filter-button:hover,
-#save-button:hover,
-#show-more-button:hover {
-  background-color: #045e55;
-  color: #FFFFF;
-}
-
-#save-button:disabled,
-#show-more-button:disabled, 
-input[type="button"].inactive {
-  background-color: #F5F5F5;
-  color: #00A79D;
-}
-
-input[type="submit"]:hover{
-  background-color: #045e55;
-  color: #FFFFF;
-}
+/* Spacer provides margin for bottom section */
 
 #spacer {
   margin-bottom: 7.5rem;
   margin-top: 12.4%;
 }
+
+/* Filter Menu/Submenu */
 
 #filter-container {
   padding: 2% 0 2% 0;
@@ -127,8 +110,8 @@ input[type="submit"]:hover{
 }
 
 .importance-filter-button {
-  background-color: #00A79D ;
-  color: #FFFFFF ;
+  background-color: #00A79D;
+  color: #FFFFFF;
   font-size: 1.3rem;
   width: 20%;
   margin: 0 0 0 0;
@@ -158,6 +141,17 @@ input[type="submit"]:hover{
   top: 2px;
 }
 
+#show-more-button {
+  background-color: #00A79D;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  margin: 0 0 3% 0;
+  padding: 1% 0;
+  width: 100%;
+}
+
+/* Psuedo classes (hide, inactive, disable) */
+
 #search-container.hidden,
 #importance-filter-container.hidden,
 #show-completed-container.hidden {
@@ -166,24 +160,22 @@ input[type="submit"]:hover{
 
 #text-filter.inactive,
 #importance-filter.inactive,
-#completed-filter.inactive {
+#completed-filter.inactive,
+.importance-filter-button.inactive,
+#save-button:disabled,
+#show-more-button:disabled {
   background-color: #F5F5F5;
   color: #00A79D;
 }
 
-h4 {
-  color: #00A79D ;
-  font-size: 1.5rem;
-  margin: 0 0 0.5rem 0;
+.importance-filter-button:hover,
+#save-button:hover,
+#show-more-button:hover {
+  background-color: #045e55;
+  color: #FFFFFF;
 }
 
-article button {
-  display: inline-block;
-  height: 25px;
-  width: 25px;
-  padding: 0 0 0 0;
-  margin: 0 2% 0 0;
-}
+/* To Do Box Main Elements */
 
 #task-container {
   align-items: center;
@@ -202,6 +194,17 @@ h2 {
   font-family: "Roboto Slab", serif;
   font-weight: 700;
   font-size: 1.5rem;
+  max-width: 90%;
+}
+
+.task-description {
+  display: inline-block;
+  color: #939598 ;
+  font-size: 1.2rem;
+  margin: 0 0 1rem 0;
+  text-align: justify;
+  word-wrap: break-word;
+  max-width: 90%;
 }
 
 h3 {
@@ -215,32 +218,58 @@ h3 {
   line-height: 24px;
 }
 
+.importance-value {
+  line-height: 24px;
+  font-family: "Open Sans", serif;
+  font-weight: 400;
+}
+
+.task-complete-label {
+  float: right;
+}
+
+.task-complete {
+  float: right;
+  width: 28px;
+  height: 25px;
+  box-shadow: none;
+}
+
+hr {
+  background-color: #D1D3D4;
+  border: none;
+  height: 1px;
+  margin: 1rem 0 1rem 0;
+}
+
+/* To Do Box Buttons */
+
+article button {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  padding: 0 0 0 0;
+  margin: 0 2% 0 0;
+}
+
 .delete-button {
   background: url("images/delete.svg") no-repeat;
   position: absolute;
-  right: .55rem;
+  right: 0.55rem;
   top: 0.35rem;
   margin: 0 0 0 0;
-}
-
-.delete-button:hover {
-  background: url("images/delete-hover.svg") no-repeat;
-}
-
-.task-description {
-  display: inline-block;
-  color: #939598 ;
-  font-size: 1.2rem;
-  margin: 0 0 1rem 0;
-  text-align: justify;
-  word-wrap: break-word;
 }
 
 .importance-up-button {
   background: url("images/upvote.svg") no-repeat;
 } 
+
 .importance-down-button {
   background: url("images/downvote.svg") no-repeat;
+}
+
+.delete-button:hover {
+  background: url("images/delete-hover.svg") no-repeat;
 }
 
 .importance-up-button:hover {
@@ -251,53 +280,25 @@ h3 {
   background: url("images/downvote-hover.svg") no-repeat;
 }
 
-.importance-value {
-  line-height: 24px;
-  font-family: "Open Sans", serif;
-  font-weight: 400;
-}
-
-.task-complete {
-  float: right;
-  width: 28px;
-  height: 25px;
-  box-shadow: none;
-}
-
-.task-complete-label {
-  float: right;
-}
-
-hr {
-  background-color: #D1D3D4 ;
-  border: none;
-  height: 1px;
-  margin: 1rem 0 1rem 0;
-}
-
 @media screen and (max-width: 720px) {
 
   #input-content,
-  footer {
-    align-content: center;
-    width: 505px
+    footer {
+    width: 505px;
   }
 
   h1 {
     font-size: 2rem;
     margin: 2% auto 2% auto;
-    width: 50%;
   }
 
   input {
-    height: 5%; 
     margin: 1.1% 0 1.2% 0;
     font-size: 1.2rem;
   }
 
   #save-button,
   #show-more-button {
-    height: 5%; 
     margin: 1.1% 0 2% 0;
     font-size: 1.2rem;
   }
@@ -309,7 +310,6 @@ hr {
 
   #filter-container,
   #main-menu,
-  #sub-menu,
   #search-container,
   #importance-filter-container,
   #show-completed-container {
@@ -317,6 +317,12 @@ hr {
     margin: auto;
   }
 
+  #filter-container {
+    padding: 2% 0 3% 0;
+  }
+
+  .task-importance-element,
+  .task-details,
   #main-menu button {
     font-size: 1rem;
   }
@@ -325,28 +331,21 @@ hr {
     width: 99.2%
   }
 
-  h4 {
-  font-size: 1.2rem;
-  margin: 0 0 0.3rem 0;
-  }
-
-  #filter-container {
-    padding: 2% 0 3% 0;
-  }
-
   .task-element {
     width: 505px;
-    height: 5%;
     margin: 0 0 2% 1px;
-    font-size: 1.2rem;
   }
 
   h2 {
     font-size: 1.2rem;
   }
 
+  .task-description {
+    padding: 0 0 0.5rem 0;
+  }
+
   h3 {
-    font-size: .8rem;
+    font-size: 0.8rem;
     margin: 0 0.3rem 0 0;
   }
 
@@ -354,15 +353,6 @@ hr {
     width: 20px;
     height: 20px;
     margin: 0 0.3rem 0 0;
-  }
-
-  .task-description {
-    padding: 0 0 0.5rem 0;
-  }
-
-  .task-importance-element,
-  .task-details {
-    font-size: 1rem;
   }
 
   .task-complete {
@@ -377,19 +367,26 @@ hr {
 
 @media screen and (max-width: 520px) {
 
-  #input-content {
+  #input-content,
+  #filter-container,
+  #main-menu,
+  #sub-menu,
+  #search-container,
+  #importance-filter-container,
+  #show-completed-container,
+  .task-element,
+  footer,
+  #show-more-button {
     width: 95vw;
   }
 
   #title-input
   #task-input,
   .task-element {
-    width: 95vw;
     margin: 0 0 2.5% 0;
   }
 
   #save-button {
-    width: 95vw;
     margin-bottom: 2%;
   }
 
@@ -399,7 +396,6 @@ hr {
   }
 
   #sub-menu {
-    width: 95vw;
     margin: auto;
   }
 
@@ -411,7 +407,6 @@ hr {
   }
 
   #show-completed-container {
-    width: 95vw;
     padding: 0.8%;
   }
 
@@ -424,13 +419,6 @@ hr {
     width: 20px;
   }
 
-  #main-menu,
-  #filter-container,
-  #search-container,
-  #importance-filter-container {
-    width: 95vw;
-  }
-
   #main-menu button {
     font-size: 0.8rem;
     padding: 1%;
@@ -438,15 +426,6 @@ hr {
 
   .importance-filter-button {
     font-size: 0.8rem;
-  }
-
-  footer {
-    width: 95vw;
-  }
-
-  #show-more-button {
-    width: 95vw;
-    margin: auto;
   }
 
   #filter-container {
@@ -457,10 +436,16 @@ hr {
 
 @media screen and (max-width: 320px) {
  
-/*do not shrink below 320px*/
-
-  body {
-    width: 320px;
+  h1,
+  #title-input,
+  #task-input,
+  .task-element,
+  #main-menu,
+  #search-container,
+  #importance-filter-container,
+  #show-completed-container,
+  #save-button {
+    width: 300px;
   }
 
   #input-container,
@@ -469,20 +454,19 @@ hr {
   }
 
   #title-input,
-  #task-input,
-  #save-button {
+  #task-input {
     height: 25px;
-    width: 300px;
-    margin: 3px 0 3px 0px;
+    margin: 3px 0 3px 0;
     font-size: 1.2rem;
   }
 
   #save-button {
     height: 30px;
+    margin: 3px 0 3px 0;
+    font-size: 1.2rem;
   }
 
   #filter-container {
-    align-content: center;
     padding: 2% 0 5% 0;
   }
 
@@ -491,24 +475,9 @@ hr {
     margin: 0 0 0 -3px;
   }
 
-  #sub-menu #search-input {
-    width: 295px;
-  }
-
-  h1,
-  .task-element,
-  #search-input,
-  #importance-filter-container,
-  footer,
-  #show-more-button,
-  #spacer,
-  #filter-container,
-  #main-menu,
   #sub-menu,
-  #search-container,
-  #importance-filter-container,
-  #show-completed-container {
-    width: 300px;
+  #search-input {
+    width: 295px;
   }
   
 }
