@@ -41,12 +41,17 @@ h1 {
 input {
   border: solid #D1D3D4 0.5px;
   box-shadow: 0 0 0 0.1rem #BBBDBF; 
-  color: #939598 ;
+  color: #000000 ;
   font-size: 1.5rem;
   letter-spacing: 0.05rem;
   margin: 0 0 2% 0;
   padding: 0.2% 1.5% 0.2% 1%;
   width: 100%;
+}
+
+input::placeholder {
+  color: #939598 ;
+
 }
 
 #save-button {
