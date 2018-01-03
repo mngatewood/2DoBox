@@ -35,7 +35,7 @@ function Card(title, body, uniqueId, quality, complete, textDeco) {
 };
 
 function checkComplete() {
-  if(this.complete = 'checked') {
+  if (this.complete = 'checked') {
     this.style.display = 'none';
   }
 }
@@ -155,6 +155,13 @@ function filterNormal() {
     var searchResult = $(this).text().indexOf('normal');
     this.style.display = searchResult > -1 ? '' : 'none';
   });
+};
+
+function focusOut() {
+  if (event.keyCode == 13) {
+  event.preventDefault();
+  $(this).prop('contenteditable', false).focusout();
+  };
 };
 
 function importanceDown(event) {
@@ -364,6 +371,8 @@ $('#task-container').on('click', '.task-complete', taskComplete);
 $('#task-container').on('click', 'h2', editTitle);
 
 $('#task-container').on('click', 'p', editDescription);
+
+$('#task-container').on('keydown', 'h2, p', focusOut);
 
 $('#text-filter').on('click', showTextFilter);
 
