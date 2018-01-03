@@ -1,8 +1,8 @@
 * {
 border: 0;
+box-sizing: border-box;
 margin: 0;
 padding: 0;
-box-sizing: border-box;
 }
 
 body {
@@ -15,15 +15,15 @@ body {
 #input-container {
   background-color: #E5F3F2 ;
   position: fixed;
+  top: 0;
   width: 100%;
   z-index: 1;
-  top: 0;
 }
 
 #input-content,
 footer {
-  width: 70%;
   margin: auto;
+  width: 70%;
 }
 
 h1 {
@@ -72,73 +72,73 @@ input {
 }
 
 #main-menu {
-  display: flex;
-  width: 70%;
   align-content: center;
+  display: flex;
   margin: auto;
+  width: 70%;
 }
 
 #main-menu button {
   background-color: #00A79D ;
+  border: 2px solid #E5F3F2;
   color: #FFFFFF ;
   font-size: 1rem;
+  height: 2.5rem;
   padding: 0.43rem;
   width: 34%;
-  border: 2px solid #E5F3F2;
-  height: 2.5rem;
 }
 
 #search-container {
+  margin: auto;
   text-align: center;
   width: 70%;
-  margin: auto;
 }
 
 #search-input {
+  border: 2px solid #E5F3F2;
   font-size: 1.3rem;
   margin: 0;
-  width: 99.7%;
-  border: 2px solid #E5F3F2;
   padding: 0.3rem;
+  width: 99.7%;
 }
 
 #importance-filter-container {
   display: flex;
   justify-content: space-between;
-  width: 70%;
   margin: auto;
+  width: 70%;
 }
 
 .importance-filter-button {
   background-color: #00A79D;
   color: #FFFFFF;
   font-size: 1.3rem;
-  width: 20%;
   margin: 0 0 0 0;
   padding: 0.4rem;
+  width: 20%;
 }
 
 #show-completed-container {
+  border: 2px solid #E5F3F2;
+  margin: auto;
+  padding: 0.28rem;
+  text-align: center;
   width: 70%;
-    border: 2px solid #E5F3F2;
-    padding: 0.28rem;
-    margin: auto;
-    text-align: center;
 }
 
 #show-completed-container label {
-  font-size: 1.15rem;
   color: #939598;
+  font-size: 1.15rem;
 }
 
 #show-completed-tasks {
-  height: 25px;
-  width: 25px;
   box-shadow: none;
+  height: 25px;
   margin: 0 0 0 0;
-  vertical-align: bottom;
   position: relative;
   top: 2px;
+  vertical-align: bottom;
+  width: 25px;
 }
 
 #show-more-button {
@@ -158,18 +158,19 @@ input {
   display: none;
 }
 
+#save-button:disabled,
 #text-filter.inactive,
 #importance-filter.inactive,
 #completed-filter.inactive,
 .importance-filter-button.inactive,
-#save-button:disabled,
 #show-more-button:disabled {
   background-color: #F5F5F5;
   color: #00A79D;
 }
 
-.importance-filter-button:hover,
 #save-button:hover,
+#main-menu button:hover,
+.importance-filter-button:hover,
 #show-more-button:hover {
   background-color: #045e55;
   color: #FFFFFF;
@@ -189,39 +190,39 @@ input {
 }
 
 h2 {
-  display: inline-block;
   color: #6D6E71 ;
+  display: inline-block;
   font-family: "Roboto Slab", serif;
-  font-weight: 700;
   font-size: 1.5rem;
+  font-weight: 700;
   max-width: 90%;
 }
 
 .task-description {
-  display: inline-block;
   color: #939598 ;
+  display: inline-block;
   font-size: 1.2rem;
   margin: 0 0 1rem 0;
+  max-width: 90%;
   text-align: justify;
   word-wrap: break-word;
-  max-width: 90%;
 }
 
 h3 {
-  display: inline-block;
   color: #6D6E71 ;
+  display: inline-block;
   font-family: "Roboto Slab", serif;
-  font-weight: 700;
   font-size: 1rem;
-  vertical-align: top;
-  margin: 0 0.5rem 0 0;
+  font-weight: 700;
   line-height: 24px;
+  margin: 0 0.5rem 0 0;
+  vertical-align: top;
 }
 
 .importance-value {
-  line-height: 24px;
   font-family: "Open Sans", serif;
   font-weight: 400;
+  line-height: 24px;
 }
 
 .task-complete-label {
@@ -229,10 +230,10 @@ h3 {
 }
 
 .task-complete {
-  float: right;
-  width: 28px;
-  height: 25px;
   box-shadow: none;
+  float: right;
+  height: 25px;
+  width: 28px;
 }
 
 hr {
@@ -247,17 +248,17 @@ hr {
 article button {
   display: inline-block;
   height: 25px;
-  width: 25px;
-  padding: 0 0 0 0;
   margin: 0 2% 0 0;
+  padding: 0 0 0 0;
+  width: 25px;
 }
 
 .delete-button {
   background: url("images/delete.svg") no-repeat;
+  margin: 0 0 0 0;
   position: absolute;
   right: 0.55rem;
   top: 0.35rem;
-  margin: 0 0 0 0;
 }
 
 .importance-up-button {
@@ -283,7 +284,7 @@ article button {
 @media screen and (max-width: 720px) {
 
   #input-content,
-    footer {
+  footer {
     width: 505px;
   }
 
@@ -293,14 +294,14 @@ article button {
   }
 
   input {
-    margin: 1.1% 0 1.2% 0;
     font-size: 1.2rem;
+    margin: 1.1% 0 1.2% 0;
   }
 
   #save-button,
   #show-more-button {
-    margin: 1.1% 0 2% 0;
     font-size: 1.2rem;
+    margin: 1.1% 0 2% 0;
   }
 
   #spacer {
@@ -313,17 +314,17 @@ article button {
   #search-container,
   #importance-filter-container,
   #show-completed-container {
-    width: 505px;
     margin: auto;
+    width: 505px;
   }
 
   #filter-container {
     padding: 2% 0 3% 0;
   }
 
+  #main-menu button,
   .task-importance-element,
-  .task-details,
-  #main-menu button {
+  .task-details {
     font-size: 1rem;
   }
 
@@ -332,8 +333,8 @@ article button {
   }
 
   .task-element {
-    width: 505px;
     margin: 0 0 2% 1px;
+    width: 505px;
   }
 
   h2 {
@@ -350,9 +351,9 @@ article button {
   }
 
   article button {
-    width: 20px;
     height: 20px;
     margin: 0 0.3rem 0 0;
+    width: 20px;
   }
 
   .task-complete {
@@ -360,7 +361,7 @@ article button {
   }
 
   hr {
-  margin: 0.5rem 0 1rem 0;
+    margin: 0.5rem 0 1rem 0;
   }
 
 }
@@ -395,15 +396,28 @@ article button {
     margin: 12% 0 0 0;
   }
 
+  #filter-container {
+    padding: 3% 0 3% 0;
+  }
+ 
+  #main-menu button {
+    font-size: 0.8rem;
+    padding: 1%;
+  }
+
   #sub-menu {
     margin: auto;
   }
 
   #search-input {
-    width: 94vw;
-    margin: auto;
     font-size: 1rem;
+    margin: auto;
     padding: 1.2%;
+    width: 94vw;
+  }
+
+  .importance-filter-button {
+    font-size: 0.8rem;
   }
 
   #show-completed-container {
@@ -419,19 +433,6 @@ article button {
     width: 20px;
   }
 
-  #main-menu button {
-    font-size: 0.8rem;
-    padding: 1%;
-  }
-
-  .importance-filter-button {
-    font-size: 0.8rem;
-  }
-
-  #filter-container {
-    padding: 3% 0 3% 0;
-  }
- 
 }
 
 @media screen and (max-width: 320px) {
@@ -439,12 +440,13 @@ article button {
   h1,
   #title-input,
   #task-input,
-  .task-element,
   #main-menu,
+  #sub-menu,
   #search-container,
   #importance-filter-container,
   #show-completed-container,
-  #save-button {
+  #save-button,
+  .task-element {
     width: 300px;
   }
 
@@ -454,16 +456,15 @@ article button {
   }
 
   #title-input,
-  #task-input {
-    height: 25px;
-    margin: 3px 0 3px 0;
+  #task-input,
+  #save-button {
     font-size: 1.2rem;
+    height: 25px;
+    margin: 3px 0 3px 3px;
   }
 
   #save-button {
     height: 30px;
-    margin: 3px 0 3px 0;
-    font-size: 1.2rem;
   }
 
   #filter-container {
@@ -472,7 +473,7 @@ article button {
 
   #main-menu,
   #sub-menu {
-    margin: 0 0 0 -3px;
+    margin: 0 0 0 2px;
   }
 
   #sub-menu,
