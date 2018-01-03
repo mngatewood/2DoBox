@@ -1,4 +1,10 @@
-Card.prototype.createCard = function () {
+window.onload = function() {
+  persistTask(Math.max(localStorage.length - 10, 0));
+  disableSaveButton();
+  disableSeeMoreButton();
+};
+
+Card.prototype.createCard = function() {
   var qualityArray = ['none', 'low', 'normal', 'high', 'critical'];
   $('#task-container').prepend(
     `<article class="task-element" id="${this.uniqueId}" aria-label="task" role="listitem">
@@ -19,7 +25,7 @@ Card.prototype.createCard = function () {
     </article>`);
 };
 
-function Card (title, body, uniqueId, quality, complete, textDeco) {
+function Card(title, body, uniqueId, quality, complete, textDeco) {
  this.title = title;
  this.uniqueId = uniqueId || $.now();
  this.body = body;
@@ -28,118 +34,18 @@ function Card (title, body, uniqueId, quality, complete, textDeco) {
  this.textDeco = textDeco;
 };
 
-function resetInputField () {
-  $('#title-input').val('');
-  $('#task-input').val('');
-  $('#title-input').focus();
-  disableSaveButton();
+function checkComplete() {
+  if(this.complete = 'checked') {
+    this.style.display = 'none';
+  }
+}
+
+function deleteButton(event) {
+  event.preventDefault();
+  var taskId = event.target.closest('.task-element').id;
+  $(`#${taskId}`).remove();
+  localStorage.removeItem(taskId);
   disableSeeMoreButton();
-};
-
-window.onload = function() {
-  persistTask(Math.max(localStorage.length - 10, 0));
-  disableSaveButton();
-  disableSeeMoreButton();
-};
-
-function persistTask(persistStart) {
-  for (i = persistStart; i < localStorage.length; i++) {
-    var getObject = localStorage.getItem(localStorage.key(i));
-    var obj = JSON.parse(getObject);
-    var persistCard = new Card(obj.title, obj.body, obj.uniqueId, obj.quality, obj.complete, obj.textDeco);
-    if (persistCard.complete == ' ') {    
-    persistCard.createCard();
-    };
-  };
-};
-
-function persistCompletedTask() {
-  for (i = 0; i < localStorage.length; i++) {
-    var getObject = localStorage.getItem(localStorage.key(i));
-    var obj = JSON.parse(getObject);
-    var persistCard = new Card(obj.title, obj.body, obj.uniqueId, obj.quality, obj.complete, obj.textDeco);
-    if (persistCard.complete == 'checked') {    
-    persistCard.createCard();
-    };
-  };
-};
-
-function stringToStorage(object) {
-  var stringifyObject = JSON.stringify(object);
-  localStorage.setItem(object.uniqueId, stringifyObject);
-};
-
-function parseFromStorage(object) {
-  var key = $(object.target).closest('article').attr('id');
-  var retrievedTask = localStorage.getItem(key);
-  var parsedTask = JSON.parse(retrievedTask);
-  return parsedTask;
-};
-
-function upVoteStorage (event, object) {
-  var $quality = $(event.target).siblings('.importance-value');
-  if ($quality.text() === 'none')  {
-    object['quality'] = 1;
-    stringToStorage(object);
-  } else if ($quality.text() === 'low') {
-    object['quality'] = 2;
-    stringToStorage(object);
-  } else if ($quality.text() === 'normal') {
-    object['quality'] = 3;
-    stringToStorage(object);
-  } else if ($quality.text() === 'high') {
-    object['quality'] = 4;
-    stringToStorage(object);
-  };
-};
-
-function upVotePage (event, object) {
-  var qualityArray = ['none', 'low', 'normal', 'high', 'critical'];
-  var $quality = $(event.target).siblings('.importance-value');
-  if ($quality.text() === 'none')  {
-    $quality.text(qualityArray[1]);
-    stringToStorage(object);
-  } else if ($quality.text() === 'low') {
-    $quality.text(qualityArray[2]);
-    stringToStorage(object);
-  } else if ($quality.text() === 'normal') {
-    $quality.text(qualityArray[3]);
-    stringToStorage(object);
-  } else if ($quality.text() === 'high') {
-    $quality.text(qualityArray[4]);
-    stringToStorage(object);
-  };
-};
-
-function downVoteStorage (event, object) {
-  var $quality = $(event.target).siblings('.importance-value');
-  if ($quality.text() === 'critical') {
-    object['quality'] = 3;
-    stringToStorage(object);
-  } else if ($quality.text() === 'high') {
-    object['quality'] = 2;
-    stringToStorage(object);
-  } else if ($quality.text() === 'normal') {
-    object['quality'] = 1;
-    stringToStorage(object);
-  } else if ($quality.text() === 'low') {
-    object['quality'] = 0;
-    stringToStorage(object);
-  };
-};
-
-function downVotePage (event, object) {
-  var qualityArray = ['none', 'low', 'normal', 'high', 'critical'];
-  var $quality = $(event.target).siblings('.importance-value');
-  if ($quality.text() === 'critical') {
-    $quality.text(qualityArray[3]);
-  } else if ($quality.text() === 'high') {
-    $quality.text(qualityArray[2]);
-  } else if ($quality.text() === 'normal') {
-    $quality.text(qualityArray[1]);
-  } else if ($quality.text() === 'low') {
-    $quality.text(qualityArray[0]);
-  };
 };
 
 function disableSaveButton() {
@@ -159,14 +65,155 @@ function disableSeeMoreButton() {
   };
 };
 
-function toggleFilterButton() {
-    $(event.target).toggleClass('inactive');
+function downVotePage(event, object) {
+  var qualityArray = ['none', 'low', 'normal', 'high', 'critical'];
+  var $quality = $(event.target).siblings('.importance-value');
+  if ($quality.text() === 'critical') {
+    $quality.text(qualityArray[3]);
+  } else if ($quality.text() === 'high') {
+    $quality.text(qualityArray[2]);
+  } else if ($quality.text() === 'normal') {
+    $quality.text(qualityArray[1]);
+  } else if ($quality.text() === 'low') {
+    $quality.text(qualityArray[0]);
+  };
 };
 
-$('#save-button').on('click', saveButton);
+function downVoteStorage(event, object) {
+  var $quality = $(event.target).siblings('.importance-value');
+  if ($quality.text() === 'critical') {
+    object['quality'] = 3;
+    stringToStorage(object);
+  } else if ($quality.text() === 'high') {
+    object['quality'] = 2;
+    stringToStorage(object);
+  } else if ($quality.text() === 'normal') {
+    object['quality'] = 1;
+    stringToStorage(object);
+  } else if ($quality.text() === 'low') {
+    object['quality'] = 0;
+    stringToStorage(object);
+  };
+};
+
+function editDescription() {
+  $(this).prop('contenteditable', true).focus();
+  $(this).focusout( function() {
+    var parsedTask = parseFromStorage(event);
+    parsedTask['body'] = $(this).html();
+    stringToStorage(parsedTask);
+  });
+};
+
+function editTitle() {
+  $(this).prop('contenteditable', true).focus();
+  $(this).focusout( function() {
+    var parsedTask = parseFromStorage(event);
+    parsedTask['title'] = $(this).html();
+    stringToStorage(parsedTask);
+  });
+};
+
+function filterByText() {
+  var searchRequest = $('#search-input').val().toLowerCase();
+  $('.task-element').each(function(){
+    var searchResult = $(this).text().toLowerCase().indexOf(searchRequest);
+    this.style.display = searchResult > -1 ? '' : 'none';
+  });
+};
+
+function filterCritical() {
+  $('.task-element').each(function(){
+    var searchResult = $(this).text().indexOf('critical');
+    this.style.display = searchResult > -1 ? '' : 'none';
+  });
+};
+
+function filterHigh() {
+  $('.task-element').each(function(){
+    var searchResult = $(this).text().indexOf('high');
+    this.style.display = searchResult > -1 ? '' : 'none';
+  });
+};
+
+function filterLow() {
+  $('.task-element').each(function(){
+    var searchResult = $(this).text().indexOf('low');
+    this.style.display = searchResult > -1 ? '' : 'none';
+  });
+};
+
+function filterNone() {
+  $('.task-element').each(function(){
+    var searchResult = $(this).text().indexOf('none');
+    this.style.display = searchResult > -1 ? '' : 'none';
+  });
+};
+
+function filterNormal() {
+  $('.task-element').each(function(){
+    var searchResult = $(this).text().indexOf('normal');
+    this.style.display = searchResult > -1 ? '' : 'none';
+  });
+};
+
+function importanceDown(event) {
+  event.preventDefault();
+  var parsedTask = parseFromStorage(event);
+  downVoteStorage(event, parsedTask);
+  downVotePage(event, parsedTask)
+};
+
+function importanceUp(event) {
+  event.preventDefault();
+  var parsedTask = parseFromStorage(event);
+  upVoteStorage(event, parsedTask);
+  upVotePage(event, parsedTask);
+};
+
+function parseFromStorage(object) {
+  var key = $(object.target).closest('article').attr('id');
+  var retrievedTask = localStorage.getItem(key);
+  var parsedTask = JSON.parse(retrievedTask);
+  return parsedTask;
+};
+
+function persistCompletedTask() {
+  for (i = 0; i < localStorage.length; i++) {
+    var getObject = localStorage.getItem(localStorage.key(i));
+    var obj = JSON.parse(getObject);
+    var persistCard = new Card(obj.title, obj.body, obj.uniqueId, obj.quality, obj.complete, obj.textDeco);
+    if (persistCard.complete == 'checked') {    
+    persistCard.createCard();
+    };
+  };
+};
+
+function persistTask(persistStart) {
+  for (i = persistStart; i < localStorage.length; i++) {
+    var getObject = localStorage.getItem(localStorage.key(i));
+    var obj = JSON.parse(getObject);
+    var persistCard = new Card(obj.title, obj.body, obj.uniqueId, obj.quality, obj.complete, obj.textDeco);
+    if (persistCard.complete == ' ') {    
+    persistCard.createCard();
+    };
+  };
+};
+
+function removeCompleted() {
+  $('.task-element').each(checkComplete);
+};
+
+function resetInputField() {
+  $('#title-input').val('');
+  $('#task-input').val('');
+  $('#title-input').focus();
+  disableSaveButton();
+  disableSeeMoreButton();
+};
 
 function saveButton(event) {
-  if ($('#title-input').val() == "" || $('#task-input').val() == ""){
+  if ($('#title-input').val() == '' || $('#task-input').val() == ''){
     return false;
   } else {
     event.preventDefault();
@@ -178,71 +225,46 @@ function saveButton(event) {
   };
 };
 
-$('#task-container').on('click', '.delete-button', deleteButton);
+function showCompleted(){
+  removeCompleted();
+  if (this.checked) {
+    persistCompletedTask();
+  } else {
+    $('.task-element').remove();
+    persistTask(Math.max(localStorage.length - 10, 0))
+  };
+};
 
-function deleteButton(event) {
-  event.preventDefault();
-  var taskId = event.target.closest('.task-element').id;
-  $(`#${taskId}`).remove();
-  localStorage.removeItem(taskId);
+function showCompletedFilter() {
+  $('#search-container').addClass('hidden');
+  $('#importance-filter-container').addClass('hidden');
+  $('#show-completed-container').removeClass('hidden');
+};
+
+function showImportanceFilter() {
+  $('#search-container').addClass('hidden');
+  $('#importance-filter-container').removeClass('hidden');
+  $('#show-completed-container').addClass('hidden');
+};
+
+function showMore() {
+  var tasksDisplayed = $('.task-element').length;
+  $('.task-element').remove();
+  var persistStart = Math.max(localStorage.length - tasksDisplayed - 10, 0);
+  persistTask(persistStart);
   disableSeeMoreButton();
 };
 
-$('#task-container').on('click', '.importance-up-button', importanceUp);
-
-function importanceUp(event) {
-  event.preventDefault();
-  var parsedTask = parseFromStorage(event);
-  upVoteStorage(event, parsedTask);
-  upVotePage(event, parsedTask);
+function showTextFilter() {
+  $('#search-container').removeClass('hidden');
+  $('#importance-filter-container').addClass('hidden');
+  $('#show-completed-container').addClass('hidden');
 };
 
-$('#task-container').on('click', '.importance-down-button', importanceDown);
-
-function importanceDown(event) {
-  event.preventDefault();
-  var parsedTask = parseFromStorage(event);
-  downVoteStorage(event, parsedTask);
-  downVotePage(event, parsedTask)
+function stringToStorage(object) {
+  var stringifyObject = JSON.stringify(object);
+  localStorage.setItem(object.uniqueId, stringifyObject);
 };
-
-$('#task-container').on('click', 'h2', editTitle);
-  
-function editTitle() {
-  $(this).prop('contenteditable', true).focus();
-  $(this).focusout( function() {
-    var parsedTask = parseFromStorage(event);
-    parsedTask['title'] = $(this).html();
-    stringToStorage(parsedTask);
-  });
-};
-
-$('#task-container').on('click', 'p', editDescription);
-
-function editDescription() {
-  $(this).prop('contenteditable', true).focus();
-  $(this).focusout( function() {
-    var parsedTask = parseFromStorage(event);
-    parsedTask['body'] = $(this).html();
-    stringToStorage(parsedTask);
-  });
-};
-
-$('#search-input').on('keyup', filterByText);
-
-function filterByText() {
-  var searchRequest = $('#search-input').val().toLowerCase();
-  $('.task-element').each(function(){
-    var searchResult = $(this).text().toLowerCase().indexOf(searchRequest);
-    this.style.display = searchResult > -1 ? "" : "none";
-  });
-};
-
-$('#title-input, #task-input').on('keyup', disableSaveButton);
-
-$('.importance-filter-button').on('click', toggleFilterButton);
-
-$('#task-container').on('click', '.task-complete', taskComplete);
 
 function taskComplete() {
   var parsedTask = parseFromStorage(event);
@@ -259,120 +281,91 @@ function taskComplete() {
   };
 };
 
-$('#show-completed-tasks').on('click', showCompleted);
-
-function showCompleted(){
-  removeCompleted();
-  if (this.checked) {
-    persistCompletedTask();
-  } else {
-    $('.task-element').remove();
-    persistTask((Math.max((localStorage.length - 10), 0)))
-  };
-};
-
-function removeCompleted() {
-  $('.task-element').each(checkComplete);
-};
-
-function checkComplete() {
-  if(this.complete = 'checked') {
-    this.style.display = 'none';
-  }
-}
-
-$('#show-more-button').on('click', showMore);
-
-function showMore() {
-  var tasksDisplayed = $('.task-element').length;
-  $('.task-element').remove();
-  var persistStart = Math.max((localStorage.length - tasksDisplayed - 10), 0);
-  persistTask(persistStart);
-  disableSeeMoreButton();
-};
-
-$('#filter-none').on('click', filterNone);
-
-function filterNone() {
-  $('.task-element').each(function(){
-    var searchResult = $(this).text().indexOf('none');
-    this.style.display = searchResult > -1 ? "" : "none";
-  });
-};
-
-$('#filter-low').on('click', filterLow);
-
-  function filterLow() {
-  $('.task-element').each(function(){
-    var searchResult = $(this).text().indexOf('low');
-    this.style.display = searchResult > -1 ? "" : "none";
-  });
-};
-
-$('#filter-normal').on('click', filterNormal);
-
-function filterNormal() {
-  $('.task-element').each(function(){
-    var searchResult = $(this).text().indexOf('normal');
-    this.style.display = searchResult > -1 ? "" : "none";
-  });
-};
-
-$('#filter-high').on('click', filterHigh);
-
-function filterHigh() {
-  $('.task-element').each(function(){
-    var searchResult = $(this).text().indexOf('high');
-    this.style.display = searchResult > -1 ? "" : "none";
-  });
-};
-
-$('#filter-critical').on('click', filterCritical);
-
-function filterCritical() {
-  $('.task-element').each(function(){
-    var searchResult = $(this).text().indexOf('critical');
-    this.style.display = searchResult > -1 ? "" : "none";
-  });
-};
-
-$('#main-menu').on('click', 'button', toggleActive);
-
-$('#importance-filter-container').on('click', 'input', toggleActive);
-
 function toggleActive() {
   $(this).removeClass('inactive');
   $(this).siblings('button, input').addClass('inactive');
 };
 
-$('#text-filter').on('click', showTextFilter)
-
-function showTextFilter() {
-  $('#search-container').removeClass('hidden');
-  $('#importance-filter-container').addClass('hidden');
-  $('#show-completed-container').addClass('hidden');
+function toggleFilterButton() {
+    $(event.target).toggleClass('inactive');
 };
 
-$('#importance-filter').on('click', showImportanceFilter)
+function upVotePage(event, object) {
+  var qualityArray = ['none', 'low', 'normal', 'high', 'critical'];
+  var $quality = $(event.target).siblings('.importance-value');
+  if ($quality.text() === 'none')  {
+    $quality.text(qualityArray[1]);
+    stringToStorage(object);
+  } else if ($quality.text() === 'low') {
+    $quality.text(qualityArray[2]);
+    stringToStorage(object);
+  } else if ($quality.text() === 'normal') {
+    $quality.text(qualityArray[3]);
+    stringToStorage(object);
+  } else if ($quality.text() === 'high') {
+    $quality.text(qualityArray[4]);
+    stringToStorage(object);
+  };
+};
 
-function showImportanceFilter() {
-  $('#search-container').addClass('hidden');
-  $('#importance-filter-container').removeClass('hidden');
-  $('#show-completed-container').addClass('hidden');
+function upVoteStorage(event, object) {
+  var $quality = $(event.target).siblings('.importance-value');
+  if ($quality.text() === 'none')  {
+    object['quality'] = 1;
+    stringToStorage(object);
+  } else if ($quality.text() === 'low') {
+    object['quality'] = 2;
+    stringToStorage(object);
+  } else if ($quality.text() === 'normal') {
+    object['quality'] = 3;
+    stringToStorage(object);
+  } else if ($quality.text() === 'high') {
+    object['quality'] = 4;
+    stringToStorage(object);
+  };
 };
 
 $('#completed-filter').on('click', showCompletedFilter);
 
-function showCompletedFilter () {
-  $('#search-container').addClass('hidden');
-  $('#importance-filter-container').addClass('hidden');
-  $('#show-completed-container').removeClass('hidden');
-};
+$('#filter-critical').on('click', filterCritical);
 
-// $('#main-menu').on('click', 'button', function () {
-//   $(this).removeClass('hidden');
-//   $(this).siblings('button').addClass('hidden');
-// });
+$('#filter-high').on('click', filterHigh);
 
+$('#filter-low').on('click', filterLow);
 
+$('#filter-none').on('click', filterNone);
+
+$('#filter-normal').on('click', filterNormal);
+
+$('#importance-filter').on('click', showImportanceFilter)
+
+$('.importance-filter-button').on('click', toggleFilterButton);
+
+$('#importance-filter-container').on('click', 'input', toggleActive);
+
+$('#main-menu').on('click', 'button', toggleActive);
+
+$('#save-button').on('click', saveButton);
+
+$('#search-input').on('keyup', filterByText);
+
+$('#show-completed-tasks').on('click', showCompleted);
+
+$('#show-more-button').on('click', showMore);
+
+$('#task-container').on('click', '.delete-button', deleteButton);
+
+$('#task-container').on('click', '.importance-down-button', importanceDown);
+
+$('#task-container').on('click', '.importance-up-button', importanceUp);
+
+$('#task-container').on('click', '.task-complete', taskComplete);
+
+$('#task-container').on('click', 'h2', editTitle);
+
+$('#task-container').on('click', 'p', editDescription);
+
+$('#text-filter').on('click', showTextFilter);
+
+$('#title-input, #task-input').on('keyup', disableSaveButton);
 
