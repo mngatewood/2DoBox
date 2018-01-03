@@ -80,7 +80,8 @@ input {
 
 #main-menu button {
   background-color: #00A79D ;
-  border: 2px solid #E5F3F2;
+  border: solid #D1D3D4 0.5px;
+  box-shadow: 0 0 0 0.1rem #BBBDBF; 
   color: #FFFFFF ;
   font-size: 1rem;
   height: 2.5rem;
@@ -99,7 +100,7 @@ input {
   font-size: 1.3rem;
   margin: 0;
   padding: 0.3rem;
-  width: 99.7%;
+  width: 100%;
 }
 
 #importance-filter-container {
@@ -119,9 +120,10 @@ input {
 }
 
 #show-completed-container {
-  border: 2px solid #E5F3F2;
+  border: solid #D1D3D4 0.5px;
+  box-shadow: 0 0 0 0.1rem #BBBDBF; 
   margin: auto;
-  padding: 0.28rem;
+  padding: 0.38rem;
   text-align: center;
   width: 70%;
 }
@@ -326,10 +328,6 @@ article button {
   .task-importance-element,
   .task-details {
     font-size: 1rem;
-  }
-
-  #search-input {
-    width: 99.2%
   }
 
   .task-element {
