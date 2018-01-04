@@ -361,6 +361,7 @@ article button {
 
   .task-complete {
     height: 15px;
+    margin: 1% 0 2% 2%;
   }
 
   hr {
@@ -433,6 +434,10 @@ article button {
   #show-completed-tasks {
     height: 20px;
     width: 20px;
+  }
+
+  .task-complete {
+    margin: 1% 0 2% 2%;
   }
 
 }
