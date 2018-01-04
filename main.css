@@ -57,7 +57,7 @@ input::placeholder {
   background-color: #00A79D ;
   color: #FFFFFF ;
   font-size: 1.5rem;
-  margin: 0 0 3% 0;
+  /*margin: 0 0 3% 0;*/
   padding: 1% 0;
   width: 100%;
 }
@@ -65,8 +65,8 @@ input::placeholder {
 /* Spacer provides margin for bottom section */
 
 #spacer {
-  margin-bottom: 7.5rem;
-  margin-top: 12.4%;
+  margin-bottom: 14rem;
+  margin-top: 14.4%;
 }
 
 /* Filter Menu/Submenu */
@@ -79,7 +79,7 @@ input::placeholder {
   align-content: center;
   display: flex;
   margin: auto;
-  width: 70%;
+  width: 100%;
 }
 
 #main-menu button {
@@ -96,7 +96,7 @@ input::placeholder {
 #search-container {
   margin: auto;
   text-align: center;
-  width: 70%;
+  width: 100%;
 }
 
 #search-input {
@@ -111,7 +111,7 @@ input::placeholder {
   display: flex;
   justify-content: space-between;
   margin: auto;
-  width: 70%;
+  width: 100%;
 }
 
 .importance-filter-button {
@@ -129,7 +129,7 @@ input::placeholder {
   margin: auto;
   padding: 0.38rem;
   text-align: center;
-  width: 70%;
+  width: 100%;
 }
 
 #show-completed-container label {
@@ -239,6 +239,7 @@ h3 {
   box-shadow: none;
   float: right;
   height: 25px;
+  margin: 0 0 2% 2%;
   width: 28px;
 }
 
@@ -311,7 +312,7 @@ article button {
   }
 
   #spacer {
-    font-size: 1rem;
+    font-size: 2rem;
     margin-top: 45px;    
   }
 
@@ -394,8 +395,8 @@ article button {
   }
 
   #spacer {
-    font-size: 5.5rem;
-    margin: 12% 0 0 0;
+    font-size: 9rem;
+    margin: 21% 0 0 0;
   }
 
   #filter-container {
@@ -453,7 +454,7 @@ article button {
 
   #input-container,
   #input-content {
-    height: 158px;
+    height: 240px;
   }
 
   #title-input,
@@ -479,7 +480,7 @@ article button {
 
   #sub-menu,
   #search-input {
-    width: 295px;
+    width: 300px;
   }
   
 }
