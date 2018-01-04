@@ -1,5 +1,6 @@
 window.onload = function() {
-  persistTask(Math.max(localStorage.length - 10, 0));
+  var counter = countCompletedCards(0);
+  persistTask(Math.max(localStorage.length - counter - 10, 0));
   disableSaveButton();
   disableSeeMoreButton();
 };
@@ -37,8 +38,22 @@ function Card(title, body, uniqueId, quality, complete, textDeco) {
 function checkComplete() {
   if (this.complete = 'checked') {
     this.style.display = 'none';
-  }
-}
+  };
+};
+
+function countCompletedCards(more) {
+  var tasksDisplayed = $('.task-element').length;
+  var tasksWithoutCompleted = Math.min(localStorage.length, (Math.max(tasksDisplayed + more, 10)));
+  var counter = 0;
+  for (var i = localStorage.length - tasksWithoutCompleted - counter; i < localStorage.length; i++) {
+    var getObject = localStorage.getItem(localStorage.key(i));
+    var obj = JSON.parse(getObject);
+   if (obj.complete === "checked") {
+     counter++;
+   };
+ };
+ return counter;
+};
 
 function deleteButton(event) {
   event.preventDefault();
@@ -57,8 +72,9 @@ function disableSaveButton() {
 };
 
 function disableSeeMoreButton() {
+  var counter = countCompletedCards(0);
   var tasksDisplayed = $('.task-element').length;
-  if (tasksDisplayed == localStorage.length) {
+  if (tasksDisplayed == localStorage.length - counter) {
     $('#show-more-button').prop('disabled', true);
   } else {
     $('#show-more-button').prop('disabled', false);
@@ -233,12 +249,14 @@ function saveButton(event) {
 };
 
 function showCompleted(){
+  var counter = countCompletedCards();
   removeCompleted();
   if (this.checked) {
+    persistTask(Math.max(localStorage.length - counter - 10, 0));
     persistCompletedTask();
   } else {
     $('.task-element').remove();
-    persistTask(Math.max(localStorage.length - 10, 0))
+    persistTask(Math.max(localStorage.length - counter - 10, 0));
   };
 };
 
@@ -255,9 +273,10 @@ function showImportanceFilter() {
 };
 
 function showMore() {
+  var counter = countCompletedCards(10);
   var tasksDisplayed = $('.task-element').length;
+  var persistStart = Math.max(localStorage.length - tasksDisplayed - counter - 10, 0);
   $('.task-element').remove();
-  var persistStart = Math.max(localStorage.length - tasksDisplayed - 10, 0);
   persistTask(persistStart);
   disableSeeMoreButton();
 };
