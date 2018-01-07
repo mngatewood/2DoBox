@@ -15,6 +15,7 @@
 
 ## Team strengths:
   **Charles:** CSS
+  
   **Michael:** Vanilla javascript
 
 ## How to overcome obstacles:
@@ -31,6 +32,7 @@
 
 ## Workload Expectations:
   **Charles** wants to be better at refactoring.
+  
   **Michael** wants as much jQuery and CSS work as possible to strengthen his challenges. 
 
 ## Workflow Expectations:
