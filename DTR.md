@@ -7,6 +7,7 @@
 
 ## Project Expectations: 
   **Charles:** Better refactoring of javascript and more jQuery practice
+  
   **Michael:** More focus on CSS and refactoring of javascript and more jQuery practice
 
 ## Goals and expectations:
