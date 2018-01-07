@@ -1,56 +1,0 @@
-Template for DTR Memo
-Project:2DoBox
-Group Member Names: Micheal Gatewood
-Project Expectations: What does each group member hope to get out of this project?
-
-Charles: Better refactoring of javascript and more jQuery practice
-Mike: More focus on CSS and refactoring of javascript and more jQuery practice
-Goals and expectations:
-
-To make it through as many phases as possible without sacrificing our health and family lives
-Team strengths:
-
-Charles: CSS
-Mike: Vanilla javascript
-
-How to overcome obstacles:
-
-Ask each other, ask Google, then ask peers, then ask higher mod/mentors/teachers.
-
-Schedule Expectations (When are we available to work together and individually?):
-
-We would like to work independently as possible, but keep constant communication throughout the process. 
-Communication Expectations (How and often will we communicate? How do we keep lines of communication open?):
-
-Slack if challenge lasts more than 30min. Text or call if no response to slack. Collaborate and come together in person if both people challenged.
-
-Abilities Expectations (Technical strengths and areas for desired improvement):
-
-See above
-
-Workload Expectations (What features do we each want to work on?):
-
-Mike wants as much jQuery and CSS work as possible to strengthen his challenges. Charles wants to be better at refactoring.
-
-Workflow Expectations (Git workflow/Tools/Code Review/Reviewing Pull Requests):
-
-Multiple branches, multiple pushes. Commit with every fix. Branch with every feature.
-
-Expectations for giving and receiving feedback:
-
-Kindness is the enemy of honesty. Be honest, be quick, be straight-forward.
-
-Agenda to discuss project launch:
-
-
-
-Ideas:
-
-
-Tools:
-
-
-Additional Notes:
-
-
-
